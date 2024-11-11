@@ -2,7 +2,9 @@ package dev.testplanisphere.hotel;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.*;
 
+import java.time.Duration;
 import java.util.List;
 
 public class HomePage extends BasePage{
@@ -60,6 +62,15 @@ public class HomePage extends BasePage{
     private WebElement copyrightText;
 
     public HomePage(WebDriver driver) {super(driver);}
+
+    //homepage navbar link click method
+    public void clickNavbarLink(int productIndex) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.elementToBeClickable(homePageNavLinkElements.get(productIndex)));
+        homePageNavLinkElements.get(productIndex).click();
+    }
+    //click navbar 'sign-up' link method
+    public void clickNavbarSignUpLink(){clickNavbarLink(2);}
 
 
     //homepage web element assert methods

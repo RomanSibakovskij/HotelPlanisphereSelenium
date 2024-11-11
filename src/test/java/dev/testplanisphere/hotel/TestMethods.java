@@ -14,6 +14,8 @@ public class TestMethods extends BaseTest{
         isGeneralPageWebElementDisplayed(homePage);
         //homepage web element assert
         isHomePageWebElementDisplayed(homePage);
+        //click navbar 'Sign-up' link
+        homePage.clickNavbarSignUpLink();
     }
 
     //homepage web element assert
