@@ -49,22 +49,25 @@ public class SignUpPage extends BasePage{
 
     public SignUpPage(WebDriver driver) {super(driver);}
 
+    //sign-up page title getter
+    public String getSignUpPageTitle(){return signUpPageTitle.getText();}
+
     //sign-up page web element assert methods
     public boolean isSignUpPageTitleDisplayed() {return signUpPageTitle.isDisplayed();}
     public boolean isRequiredBadgeDisplayed() {return requiredBadge.isDisplayed();}
-    public boolean isEmailInputDisplayed() {return emailInputField.isDisplayed();}
-    public boolean isPasswordInputDisplayed() {return passwordInputField.isDisplayed();}
+    public boolean isEmailInputFieldDisplayed() {return emailInputField.isDisplayed();}
+    public boolean isPasswordInputFieldDisplayed() {return passwordInputField.isDisplayed();}
     public boolean isPasswordInputHintDisplayed(){return passwordInputHint.isDisplayed();}
-    public boolean isConfirmPasswordInputDisplayed() {return confirmPasswordInputField.isDisplayed();}
+    public boolean isConfirmPasswordInputFieldDisplayed() {return confirmPasswordInputField.isDisplayed();}
     public boolean isConfirmPasswordInputHintDisplayed(){return confirmPasswordInputHint.isDisplayed();}
-    public boolean isFullNameInputDisplayed() {return fullNameInputField.isDisplayed();}
+    public boolean isFullNameInputFieldDisplayed() {return fullNameInputField.isDisplayed();}
     public boolean isPremiumMembershipDotCircleDisplayed() {return premiumMembershipDotCircle.isDisplayed();}
     public boolean isMembershipDotCircleDisplayed() {return membershipDotCircle.isDisplayed();}
-    public boolean isAddressInputDisplayed() {return addressInputField.isDisplayed();}
-    public boolean isPhoneInputDisplayed() {return phoneInputField.isDisplayed();}
+    public boolean isAddressInputFieldDisplayed() {return addressInputField.isDisplayed();}
+    public boolean isPhoneInputFieldDisplayed() {return phoneInputField.isDisplayed();}
     public boolean isPhoneInputHintDisplayed(){return phoneInputHint.isDisplayed();}
     public boolean isGenderDropdownMenuDisplayed() {return genderDropdownMenu.isDisplayed();}
-    public boolean isBirthdateInputDisplayed() {return birthdateInputField.isDisplayed();}
+    public boolean isBirthdateInputFieldDisplayed() {return birthdateInputField.isDisplayed();}
     public boolean isReceiveNotificationCheckboxDisplayed() {return receiveNotificationCheckbox.isDisplayed();}
     public boolean isSignUpButtonDisplayed() {return signUpButton.isDisplayed();}
 

@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestMethods extends BaseTest{
 
     protected static final Logger logger = LoggerFactory.getLogger(TestMethods.class);
-//    protected HomePage homePage;
 
     //navigate to 'Sign-up' page test method
     protected void navigateToSignUpPageTest(HomePage homePage){
@@ -16,9 +15,21 @@ public class TestMethods extends BaseTest{
         isHomePageWebElementDisplayed(homePage);
         //click navbar 'Sign-up' link
         homePage.clickNavbarSignUpLink();
+        SignUpPage signUpPage = new SignUpPage(driver);
+        //assert the user gets on sign-up page
+        assertEquals("Sign up", signUpPage.getSignUpPageTitle(), "The 'Sign-up' page title doesn't match expectations or the user is on the wrong page");
     }
 
-    //homepage web element assert
+    //valid user account creation test method
+    protected void createValidUserAccountRequiredOnlyInputTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //sign-up page web element assert
+        isSignUpPageWebElementDisplayed(signUpPage);
+    }
+
+    //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage) {
         //assert example codes section title is displayed
         assertTrue(homePage.isExampleCodesSectionTitleDisplayed(), "The example codes section title isn't displayed");
@@ -58,7 +69,45 @@ public class TestMethods extends BaseTest{
         assertTrue(homePage.isSelenium4JavaBoxViewCodesLinkDisplayed(), "The Selenium 4 Java box 'View Codes' link isn't displayed");
     }
 
-    //general page web element assert
+    //sign-up page web element assert test method
+    protected void isSignUpPageWebElementDisplayed(SignUpPage signUpPage) {
+        //assert 'Sign-up' page title is displayed
+        assertTrue(signUpPage.isSignUpPageTitleDisplayed(), "The 'Sign-up' page title isn't displayed");
+        //assert required badge is displayed
+        assertTrue(signUpPage.isRequiredBadgeDisplayed(), "The 'Sign-up' page 'Required' badge isn't displayed");
+        //assert email input field is displayed
+        assertTrue(signUpPage.isEmailInputFieldDisplayed(), "The email input field isn't displayed");
+        //assert password input field is displayed
+        assertTrue(signUpPage.isPasswordInputFieldDisplayed(), "The password input field isn't displayed");
+        //assert password input hint is displayed
+        assertTrue(signUpPage.isPasswordInputHintDisplayed(), "The password input hint isn't displayed");
+        //assert confirm password input field is displayed
+        assertTrue(signUpPage.isConfirmPasswordInputFieldDisplayed(), "The confirm password input field isn't displayed");
+        //assert confirm password input hint is displayed
+        assertTrue(signUpPage.isConfirmPasswordInputHintDisplayed(), "The confirm password input hint isn't displayed");
+        //assert full name input field is displayed
+        assertTrue(signUpPage.isFullNameInputFieldDisplayed(), "The full name input field isn't displayed");
+        //assert premium membership radio button is displayed
+        assertTrue(signUpPage.isPremiumMembershipDotCircleDisplayed(), "The premium membership radio button isn't displayed");
+        //assert membership radio button is displayed
+        assertTrue(signUpPage.isMembershipDotCircleDisplayed(), "The membership radio button isn't displayed");
+        //assert address input field is displayed
+        assertTrue(signUpPage.isAddressInputFieldDisplayed(), "The address input field isn't displayed");
+        //assert phone input field is displayed
+        assertTrue(signUpPage.isPhoneInputFieldDisplayed(), "The phone input field isn't displayed");
+        //assert phone input hint is displayed
+        assertTrue(signUpPage.isPhoneInputHintDisplayed(), "The phone input hint isn't displayed");
+        //assert gender dropdown menu is displayed
+        assertTrue(signUpPage.isGenderDropdownMenuDisplayed(), "The gender dropdown menu isn't displayed");
+        //assert birthdate input field is displayed
+        assertTrue(signUpPage.isBirthdateInputFieldDisplayed(), "The birthdate input field isn't displayed");
+        //assert 'Receive notification' checkbox is displayed
+        assertTrue(signUpPage.isReceiveNotificationCheckboxDisplayed(), "The 'Receive notification' checkbox isn't displayed");
+        //assert 'Sign-up' button is displayed
+        assertTrue(signUpPage.isSignUpButtonDisplayed(), "The 'Sign-up input field isn't displayed");
+    }
+
+    //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage) {
         //assert home page title is displayed
         assertTrue(homePage.isHomePageTitleDisplayed(), "The homepage title isn't displayed");
