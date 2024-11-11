@@ -63,7 +63,7 @@ public class HomePage extends BasePage{
 
 
     //homepage web element assert methods
-    public boolean isHomPageTitleDisplayed(){return homePageTitle.isDisplayed();}
+    public boolean isHomePageTitleDisplayed(){return homePageTitle.isDisplayed();}
     public boolean isExampleCodesSectionTitleDisplayed(){return exampleCodesSectionTitle.isDisplayed();}
     public boolean isExampleCodesSectionDescriptionDisplayed(){return exampleCodesSectionDescription.isDisplayed();}
     public boolean isSelenideBoxTitleDisplayed(){return selenideBoxTitle.isDisplayed();}
@@ -81,7 +81,7 @@ public class HomePage extends BasePage{
     public boolean isSelenium4JavaBoxTitleDisplayed(){return selenium4JavaBoxTitle.isDisplayed();}
     public boolean isSelenium4WebdriverLinkDisplayed(){return webdriverLink.isDisplayed();}
     public boolean isSelenium4JUnit5LinkDisplayed(){return jUnit5SeleniumLink.isDisplayed();}
-    public boolean isSelenide4JavaBoxViewCodesLinkDisplayed(){return viewSelenium4JavaBoxCodesLink.isDisplayed();}
+    public boolean isSelenium4JavaBoxViewCodesLinkDisplayed(){return viewSelenium4JavaBoxCodesLink.isDisplayed();}
     public boolean isFooterGithubLinkDisplayed(){return footerGithubLink.isDisplayed();}
     public boolean isCopyrightTextDisplayed(){return copyrightText.isDisplayed();}
 
