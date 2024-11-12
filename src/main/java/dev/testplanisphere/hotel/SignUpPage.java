@@ -37,6 +37,8 @@ public class SignUpPage extends BasePage{
     private WebElement phoneInputField;
     @FindBy(xpath = "//small[.='Please enter 11-digit number. Ex: 01133335555']")
     private WebElement phoneInputHint;
+    @FindBy(xpath = "//div[.='Please match the requested format.']")
+    private WebElement invalidPhoneInput;
     @FindBy(xpath = "//select[@id='gender']")
     private WebElement genderDropdownMenu;
     //gender options
@@ -61,6 +63,9 @@ public class SignUpPage extends BasePage{
     private String address;
     private String phone;
     private String birthdate;
+
+    //invalid input data
+    private String tooShortPhone;
 
     public SignUpPage(WebDriver driver) {super(driver);}
 
@@ -110,14 +115,34 @@ public class SignUpPage extends BasePage{
         phone = "011" + TestDataGenerator.generatePhoneNumber(8);
         birthdate = TestDataGenerator.generateBirthdate();
 
-        System.out.println("Valid input data generated (required input only): " + "\n");
-        logger.info("Email address: " + email);
-        logger.info("Password: " + password);
-        logger.info("Confirm password: " + confirmPassword);
-        logger.info("Full Name: " + fullName);
-        logger.info("Address: " + address);
-        logger.info("Phone number: " + phone);
-        logger.info("Birthdate: " + birthdate);
+        System.out.println("Valid input data generated (all input): " + "\n");
+        logger.info("Email address (all input): " + email);
+        logger.info("Password (all input): " + password);
+        logger.info("Confirm password (all input): " + confirmPassword);
+        logger.info("Full Name (all input): " + fullName);
+        logger.info("Address (all input): " + address);
+        logger.info("Phone number (all input): " + phone);
+        logger.info("Birthdate (all input): " + birthdate);
+        System.out.println("\n");
+    }
+    //valid input data getter (with all input data)
+    public void validInputDataAllInputsTooShortPhone(){
+        email = TestDataGenerator.generateRandomEmailAddress(5);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+        fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
+        address = TestDataGenerator.generateRandomAddress(6);
+        tooShortPhone = "011" + TestDataGenerator.generatePhoneNumber(7);
+        birthdate = TestDataGenerator.generateBirthdate();
+
+        System.out.println("Valid input data generated (all input - too short phone number): " + "\n");
+        logger.info("Email address (all input - too short phone number): " + email);
+        logger.info("Password (all input - too short phone number): " + password);
+        logger.info("Confirm password (all input - too short phone number): " + confirmPassword);
+        logger.info("Full Name (all input - too short phone number): " + fullName);
+        logger.info("Address (all input - too short phone number): " + address);
+        logger.info("Too short phone number (all input - too short phone number): " + tooShortPhone);
+        logger.info("Birthdate (all input - too short phone number): " + birthdate);
         System.out.println("\n");
     }
     //valid address input method(this input field has no restrictions)
@@ -139,6 +164,13 @@ public class SignUpPage extends BasePage{
         birthdateInputField.sendKeys(birthdate);
     }
 
+    //invalid phone input method - too short phone number
+    public void inputTooShortPhone(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(phoneInputField));
+        phoneInputField.sendKeys(tooShortPhone);
+    }
+
     //'Premium membership' click method
     public void selectPremiumMembership(){premiumMembershipDotCircle.click();}
     //click gender dropdown menu method
@@ -153,6 +185,9 @@ public class SignUpPage extends BasePage{
     public void selectFemaleGenderOption(){femaleGenderOption.click();}
     //click 'Receive notification' method
     public void clickReceiveNotificationCheckbox(){receiveNotificationCheckbox.click();}
+
+    //invalid phone input getter
+    public String getInvalidPhoneInputMessage(){return invalidPhoneInput.getText();}
 
     //sign-up button click method
     public void clickSignUpButton(){signUpButton.click();}
