@@ -26,6 +26,8 @@ public class SignUpPage extends BasePage{
     private WebElement invalidPasswordInput;
     @FindBy(xpath = "//input[@id='password-confirmation']")
     private WebElement confirmPasswordInputField;
+    @FindBy(xpath = "//div[contains(text(), \"Password doesn't match.\")]")
+    private WebElement mismatchingConfirmPasswordInput;
     @FindBy(xpath = "//small[.='Please enter your password again to confirm.']")
     private WebElement confirmPasswordInputHint;
     @FindBy(xpath = "//input[@id='username']")
@@ -76,6 +78,9 @@ public class SignUpPage extends BasePage{
 
     //invalid singular input data (invalid email format)
     private String invalidEmailFormat;
+
+    //invalid singular input data (mismatching confirm password)
+    private String mismatchingConfirmPassword;
 
     public SignUpPage(WebDriver driver) {super(driver);}
 
@@ -204,6 +209,20 @@ public class SignUpPage extends BasePage{
         logger.info("Full Name (required input only - too short password): " + fullName);
         System.out.println("\n");
     }
+    //invalid input data getter (required input data only - mismatching confirm password)
+    public void invalidInputDataRequiredOnlyWithMismatchingConfirmPassword(){
+        email = TestDataGenerator.generateRandomEmailAddress(5);
+        password = TestDataGenerator.generateRandomPassword();
+        mismatchingConfirmPassword = "GbhjhnHjyyg#$2";
+        fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
+
+        System.out.println("Invalid input data generated (required input only - mismatching confirm password): " + "\n");
+        logger.info("Email address (required input only - mismatching confirm password): " + email);
+        logger.info("Password (required input only - mismatching confirm password): " + password);
+        logger.info("Mismatching confirm password (required input only - mismatching confirm password): " + mismatchingConfirmPassword);
+        logger.info("Full Name (required input only - mismatching confirm password): " + fullName);
+        System.out.println("\n");
+    }
 
     //valid address input method(this input field has no restrictions)
     public void inputValidAddress(){
@@ -254,6 +273,12 @@ public class SignUpPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
         confirmPasswordInputField.sendKeys(tooShortPassword);
     }
+    //invalid data input method - mismatching confirm password
+    public void inputMismatchingConfirmPassword(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
+        confirmPasswordInputField.sendKeys(mismatchingConfirmPassword);
+    }
 
     //'Premium membership' click method
     public void selectPremiumMembership(){premiumMembershipDotCircle.click();}
@@ -276,6 +301,8 @@ public class SignUpPage extends BasePage{
     public String getInvalidEmailFormatMessage(){return invalidEmailFormatInput.getText();}
     //invalid password input message getter (same for confirm password)
     public String getInvalidPasswordInputMessage(){return invalidPasswordInput.getText();}
+    //mismatching confirm password input message getter
+    public String getMismatchingConfirmPasswordMessage(){return mismatchingConfirmPasswordInput.getText();}
 
     //sign-up button click method
     public void clickSignUpButton(){signUpButton.click();}
