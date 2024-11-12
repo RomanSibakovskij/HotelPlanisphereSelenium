@@ -27,6 +27,20 @@ public class TestMethods extends BaseTest{
         isGeneralPageWebElementDisplayed(homePage);
         //sign-up page web element assert
         isSignUpPageWebElementDisplayed(signUpPage);
+        //assert the text displayed is valid
+        isSignUpTextAsExpected(signUpPage);
+        //valid input data getter(required input only)
+        signUpPage.validInputDataRequiredOnly();
+        //input valid email
+        signUpPage.inputValidEmailAddress();
+        //input valid password
+        signUpPage.inputValidPassword();
+        //input valid confirm password
+        signUpPage.inputValidConfirmPassword();
+        //input valid full name
+        signUpPage.inputValidFullName();
+        //click 'Sign-up' button
+        signUpPage.clickSignUpButton();
     }
 
     //homepage web element assert test method
@@ -105,6 +119,17 @@ public class TestMethods extends BaseTest{
         assertTrue(signUpPage.isReceiveNotificationCheckboxDisplayed(), "The 'Receive notification' checkbox isn't displayed");
         //assert 'Sign-up' button is displayed
         assertTrue(signUpPage.isSignUpButtonDisplayed(), "The 'Sign-up input field isn't displayed");
+    }
+    //sign-up text assert method
+    protected void isSignUpTextAsExpected(SignUpPage signUpPage) {
+        //assert 'Required' badge is as expected
+        assertEquals("required", signUpPage.getRequiredBadge(), "The 'Required' badge text doesn't match expectations");
+        //assert password hint is as expected
+        assertEquals("Please lengthen this text to 8 characters.", signUpPage.getPasswordInputHint(), "The password input hint text doesn't match expectations");
+        //assert confirm password hint is as expected
+        assertEquals("Please enter your password again to confirm.", signUpPage.getConfirmPasswordInputHint(), "The confirm password input hint text doesn't match expectations");
+        //assert phone input hint is as expected
+        assertEquals("Please enter 11-digit number. Ex: 01133335555", signUpPage.getPhoneInputHint(), "The phone input hint text doesn't match expectations");
     }
 
     //general page web element assert test method

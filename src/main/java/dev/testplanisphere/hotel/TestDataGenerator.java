@@ -141,22 +141,22 @@ public class TestDataGenerator extends BasePage{
         return password.toString();
     }
 
-        public static String generatePhoneNumber() {
-            Random random = new Random();
-
-            //generate a 3-digit area code (100-999 to avoid invalid area codes like 000)
-            int areaCode = 100 + random.nextInt(900);
-
-            //generate a 3-digit exchange code (100-999 to avoid invalid exchanges like 000)
-            int exchangeCode = 100 + random.nextInt(900);
-
-            //generate a 4-digit line number (0000-9999)
-            int lineNumber = random.nextInt(10000);
-
-            //format the phone number as a string (e.g., 123-456-7890)
-            return String.format("%03d-%03d-%04d", areaCode, exchangeCode, lineNumber);
+    public static String generatePhoneNumber(int length) {
+        Random random = new Random();
+        StringBuilder phoneNumber = new StringBuilder("011");
+        //calculate how many random digits are needed after the "011" prefix
+        int randomDigitCount = length - 3; //subtract 3 for the "011" prefix
+        //ensure the length is valid (must be at least 4 to allow for one random digit)
+        if (randomDigitCount < 1) {
+            throw new IllegalArgumentException("Phone number length must be at least 4.");
         }
-        
+        //generate the required random digits
+        for (int i = 0; i < randomDigitCount; i++) {
+            phoneNumber.append(random.nextInt(10));
+        }
+        return phoneNumber.toString();
+    }
+
 
     public static String getFirstName(){return firstName;}
     public static String getLastName(){return lastName;}

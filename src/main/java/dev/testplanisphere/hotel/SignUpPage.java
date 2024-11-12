@@ -47,10 +47,66 @@ public class SignUpPage extends BasePage{
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement signUpButton;
 
+    //valid input data
+    private String fullName;
+    private String email;
+    private String password;
+    private String confirmPassword;
+    private String address;
+    private int phone;
+    private String birthdate;
+
     public SignUpPage(WebDriver driver) {super(driver);}
+
+    //valid input data getter (required input data only)
+    public void validInputDataRequiredOnly(){
+        email = TestDataGenerator.generateRandomEmailAddress(5);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+        fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
+
+        System.out.println("Valid input data generated (required input only): " + "\n");
+        logger.info("Email address: " + email);
+        logger.info("Password: " + password);
+        logger.info("Confirm password: " + confirmPassword);
+        logger.info("Full Name: " + fullName);
+        System.out.println("\n");
+    }
+    //valid data input methods
+    public void inputValidEmailAddress(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(email);
+    }
+    public void inputValidPassword(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(passwordInputField));
+        passwordInputField.sendKeys(password);
+    }
+    public void inputValidConfirmPassword(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
+        confirmPasswordInputField.sendKeys(confirmPassword);
+    }
+    public void inputValidFullName(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(fullNameInputField));
+        fullNameInputField.sendKeys(fullName);
+    }
+
+    //sign-up button click method
+    public void clickSignUpButton(){signUpButton.click();}
 
     //sign-up page title getter
     public String getSignUpPageTitle(){return signUpPageTitle.getText();}
+    //'Required' badge getter
+    public String getRequiredBadge(){return requiredBadge.getText();}
+    //password hint getter
+    public String getPasswordInputHint(){return passwordInputHint.getText();}
+    //confirm password hint getter
+    public String getConfirmPasswordInputHint(){return confirmPasswordInputHint.getText();}
+    //phone input hint
+    public String getPhoneInputHint(){return phoneInputHint.getText();}
 
     //sign-up page web element assert methods
     public boolean isSignUpPageTitleDisplayed() {return signUpPageTitle.isDisplayed();}
