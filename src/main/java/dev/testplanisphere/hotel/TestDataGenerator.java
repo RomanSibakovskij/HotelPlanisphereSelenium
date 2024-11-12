@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.security.SecureRandom;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TestDataGenerator extends BasePage{
 
@@ -142,19 +144,41 @@ public class TestDataGenerator extends BasePage{
     }
 
     public static String generatePhoneNumber(int length) {
+        if (length < 1) {throw new IllegalArgumentException("Phone number length must be at least 1.");}
+
         Random random = new Random();
-        StringBuilder phoneNumber = new StringBuilder("011");
-        //calculate how many random digits are needed after the "011" prefix
-        int randomDigitCount = length - 3; //subtract 3 for the "011" prefix
-        //ensure the length is valid (must be at least 4 to allow for one random digit)
-        if (randomDigitCount < 1) {
-            throw new IllegalArgumentException("Phone number length must be at least 4.");
+        String phoneNumber = "";
+        //generate the specified number of random digits
+        for (int i = 0; i < length; i++) {
+            phoneNumber += random.nextInt(10); //generate a random digit (0-9)
         }
-        //generate the required random digits
-        for (int i = 0; i < randomDigitCount; i++) {
-            phoneNumber.append(random.nextInt(10));
+        return phoneNumber;
+    }
+
+    public static String generateBirthdate() {
+        Random random = new Random();
+        //generate a random year between 1950 and 2005
+        int year = 1950 + random.nextInt(2005 - 1950 + 1);
+        //generate a random month between 1 and 12
+        int month = 1 + random.nextInt(12);
+        //generate a day based on the month and year (to ensure valid dates)
+        int day;
+        switch (month) {
+            case 4: case 6: case 9: case 11:
+                day = 1 + random.nextInt(30); //30 days for April, June, September, November
+                break;
+            case 2:
+                //verify it's a leap year for February
+                day = 1 + random.nextInt(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) ? 29 : 28);
+                break;
+            default:
+                day = 1 + random.nextInt(31);
         }
-        return phoneNumber.toString();
+        //creates the date with LocalDate for accurate formatting
+        LocalDate birthdate = LocalDate.of(year, month, day);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+        return birthdate.format(formatter);
     }
 
 

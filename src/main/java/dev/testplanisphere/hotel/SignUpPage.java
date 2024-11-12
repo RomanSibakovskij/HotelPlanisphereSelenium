@@ -39,6 +39,12 @@ public class SignUpPage extends BasePage{
     private WebElement phoneInputHint;
     @FindBy(xpath = "//select[@id='gender']")
     private WebElement genderDropdownMenu;
+    //gender options
+    @FindBy(xpath = "//option[@value='1']")
+    private WebElement maleGenderOption;
+    @FindBy(xpath = "//option[@value='2']")
+    private WebElement femaleGenderOption;
+
     @FindBy(xpath = "//input[@id='birthday']")
     private WebElement birthdateInputField;
     @FindBy(xpath = "//input[@id='notification']")
@@ -53,7 +59,7 @@ public class SignUpPage extends BasePage{
     private String password;
     private String confirmPassword;
     private String address;
-    private int phone;
+    private String phone;
     private String birthdate;
 
     public SignUpPage(WebDriver driver) {super(driver);}
@@ -93,6 +99,60 @@ public class SignUpPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(fullNameInputField));
         fullNameInputField.sendKeys(fullName);
     }
+
+    //valid input data getter (with all input data)
+    public void validInputDataAllInputs(){
+        email = TestDataGenerator.generateRandomEmailAddress(5);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+        fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
+        address = TestDataGenerator.generateRandomAddress(6);
+        phone = "011" + TestDataGenerator.generatePhoneNumber(8);
+        birthdate = TestDataGenerator.generateBirthdate();
+
+        System.out.println("Valid input data generated (required input only): " + "\n");
+        logger.info("Email address: " + email);
+        logger.info("Password: " + password);
+        logger.info("Confirm password: " + confirmPassword);
+        logger.info("Full Name: " + fullName);
+        logger.info("Address: " + address);
+        logger.info("Phone number: " + phone);
+        logger.info("Birthdate: " + birthdate);
+        System.out.println("\n");
+    }
+    //valid address input method(this input field has no restrictions)
+    public void inputValidAddress(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(addressInputField));
+        addressInputField.sendKeys(address);
+    }
+    //valid phone input method
+    public void inputValidPhone(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(phoneInputField));
+        phoneInputField.sendKeys(phone);
+    }
+    //valid birthdate format input method
+    public void inputValidBirthdate(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(birthdateInputField));
+        birthdateInputField.sendKeys(birthdate);
+    }
+
+    //'Premium membership' click method
+    public void selectPremiumMembership(){premiumMembershipDotCircle.click();}
+    //click gender dropdown menu method
+    public void clickGenderDropdownMenu(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.elementToBeClickable(genderDropdownMenu));
+        genderDropdownMenu.click();
+    }
+    //select male gender method
+    public void selectMaleGenderOption(){maleGenderOption.click();}
+    //select female gender method
+    public void selectFemaleGenderOption(){femaleGenderOption.click();}
+    //click 'Receive notification' method
+    public void clickReceiveNotificationCheckbox(){receiveNotificationCheckbox.click();}
 
     //sign-up button click method
     public void clickSignUpButton(){signUpButton.click();}

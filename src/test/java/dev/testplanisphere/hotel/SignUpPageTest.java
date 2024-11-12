@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 
 public class SignUpPageTest extends TestMethods{
 
-    //Test 002 -> valid user account creation test
+    //Test 002 -> valid user account creation test (the required input only)
     @Test
     @DisplayName("Valid User Account Creation Test (required input only)")
     @Tag("Valid_User_Account_Creation")
@@ -15,5 +15,18 @@ public class SignUpPageTest extends TestMethods{
         SignUpPage signUpPage = new SignUpPage(driver);
         //valid user account creation test (required only)
         createValidUserAccountRequiredOnlyInputTest(signUpPage);
+    }
+
+    //Test 002a -> valid user account creation test (all input)
+    @Test
+    @DisplayName("Valid User Account Creation Test (all input)")
+    @Tag("Valid_User_Account_Creation")
+    @Tag("All_Input_Only")
+    void validAccountRequiredAllInputCreationTest(){
+        HomePage homePage = new HomePage(driver);
+        navigateToSignUpPageTest(homePage);
+        SignUpPage signUpPage = new SignUpPage(driver);
+        //valid user account creation test (all input)
+        createValidUserAccountAllInputTest(signUpPage);
     }
 }

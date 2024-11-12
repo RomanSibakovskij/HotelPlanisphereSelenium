@@ -20,7 +20,7 @@ public class TestMethods extends BaseTest{
         assertEquals("Sign up", signUpPage.getSignUpPageTitle(), "The 'Sign-up' page title doesn't match expectations or the user is on the wrong page");
     }
 
-    //valid user account creation test method
+    //valid user account creation test method (required only input)
     protected void createValidUserAccountRequiredOnlyInputTest(SignUpPage signUpPage){
         HomePage homePage = new HomePage(driver);
         //general web element assert
@@ -49,6 +49,50 @@ public class TestMethods extends BaseTest{
         //log the displayed 'My account' table data
         logMyAccountDisplayedData(myAccountPage);
     }
+    //valid user account creation test method (all input)
+    protected void createValidUserAccountAllInputTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //sign-up page web element assert
+        isSignUpPageWebElementDisplayed(signUpPage);
+        //assert the text displayed is valid
+        isSignUpTextAsExpected(signUpPage);
+        //valid input data getter(all inputs)
+        signUpPage.validInputDataAllInputs();
+        //input valid email
+        signUpPage.inputValidEmailAddress();
+        //input valid password
+        signUpPage.inputValidPassword();
+        //input valid confirm password
+        signUpPage.inputValidConfirmPassword();
+        //input valid full name
+        signUpPage.inputValidFullName();
+        //select 'Premium membership' radio button
+        signUpPage.selectPremiumMembership();
+        //input valid address (this input field will have no further testing due to it not having any input restrictions)
+        signUpPage.inputValidAddress();
+        //input valid phone number
+        signUpPage.inputValidPhone();
+        //click gender dropdown menu
+        signUpPage.clickGenderDropdownMenu();
+        //select 'female' gender
+        signUpPage.selectFemaleGenderOption();
+        //input valid birthdate
+        signUpPage.inputValidBirthdate();
+        //click 'Receive notification' checkbox
+        signUpPage.clickReceiveNotificationCheckbox();
+        //click 'Sign-up' button
+        signUpPage.clickSignUpButton();
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        //assert the user gets on 'My account' page
+        assertEquals("MyPage", myAccountPage.getMyAccountPageTitle(), "The 'My account' page title doesn't match expectations or the user is on the wrong page");
+        //my account web element assert
+        isMyAccountPageWebElementDisplayed(myAccountPage);
+        //log the displayed 'My account' table data
+        logMyAccountDisplayedData(myAccountPage);
+    }
+
 
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage) {
