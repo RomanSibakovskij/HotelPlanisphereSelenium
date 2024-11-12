@@ -64,8 +64,10 @@ public class SignUpPage extends BasePage{
     private String phone;
     private String birthdate;
 
-    //invalid input data
+    //invalid singular input data (too short)
     private String tooShortPhone;
+    //invalid singular input data (too long)
+    private String tooLongPhone;
 
     public SignUpPage(WebDriver driver) {super(driver);}
 
@@ -125,8 +127,9 @@ public class SignUpPage extends BasePage{
         logger.info("Birthdate (all input): " + birthdate);
         System.out.println("\n");
     }
-    //valid input data getter (with all input data)
-    public void validInputDataAllInputsTooShortPhone(){
+
+    //invalid input data getter (with all input data - too short phone number)
+    public void invalidInputDataAllInputsTooShortPhone(){
         email = TestDataGenerator.generateRandomEmailAddress(5);
         password = TestDataGenerator.generateRandomPassword();
         confirmPassword = password;
@@ -145,6 +148,27 @@ public class SignUpPage extends BasePage{
         logger.info("Birthdate (all input - too short phone number): " + birthdate);
         System.out.println("\n");
     }
+    //invalid input data getter (with all input data - too long phone number)
+    public void invalidInputDataAllInputsTooLongPhone(){
+        email = TestDataGenerator.generateRandomEmailAddress(5);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+        fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
+        address = TestDataGenerator.generateRandomAddress(6);
+        tooLongPhone = "011" + TestDataGenerator.generatePhoneNumber(9);
+        birthdate = TestDataGenerator.generateBirthdate();
+
+        System.out.println("Valid input data generated (all input - too long phone number): " + "\n");
+        logger.info("Email address (all input - too long phone number): " + email);
+        logger.info("Password (all input - too long phone number): " + password);
+        logger.info("Confirm password (all input - too long phone number): " + confirmPassword);
+        logger.info("Full Name (all input - too long phone number): " + fullName);
+        logger.info("Address (all input - too long phone number): " + address);
+        logger.info("Too long phone number (all input - too long phone number): " + tooLongPhone);
+        logger.info("Birthdate (all input - too long phone number): " + birthdate);
+        System.out.println("\n");
+    }
+
     //valid address input method(this input field has no restrictions)
     public void inputValidAddress(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
@@ -169,6 +193,12 @@ public class SignUpPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
         wait.until(ExpectedConditions.visibilityOf(phoneInputField));
         phoneInputField.sendKeys(tooShortPhone);
+    }
+    //invalid phone input method - too long phone number
+    public void inputTooLongPhone(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(phoneInputField));
+        phoneInputField.sendKeys(tooLongPhone);
     }
 
     //'Premium membership' click method

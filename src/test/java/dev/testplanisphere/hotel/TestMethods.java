@@ -92,6 +92,9 @@ public class TestMethods extends BaseTest{
         //log the displayed 'My account' table data
         logMyAccountDisplayedData(myAccountPage);
     }
+
+    //negative user account creation methods
+
     //invalid user account creation test method (all input - too short phone number)
     protected void createInvalidUserAccountAllInputTooShortPhoneTest(SignUpPage signUpPage){
         HomePage homePage = new HomePage(driver);
@@ -102,7 +105,7 @@ public class TestMethods extends BaseTest{
         //assert the text displayed is valid
         isSignUpTextAsExpected(signUpPage);
         //valid input data getter(all inputs - too short phone number)
-        signUpPage.validInputDataAllInputsTooShortPhone();
+        signUpPage.invalidInputDataAllInputsTooShortPhone();
         //input valid email
         signUpPage.inputValidEmailAddress();
         //input valid password
@@ -130,6 +133,45 @@ public class TestMethods extends BaseTest{
         //assert the expected error message is displayed
         assertEquals("Please match the requested format.", signUpPage.getInvalidPhoneInputMessage(), "The expected invalid input message isn't displayed.");
     }
+    //invalid user account creation test method (all input - too long phone number)
+    protected void createInvalidUserAccountAllInputTooLongPhoneTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //sign-up page web element assert
+        isSignUpPageWebElementDisplayed(signUpPage);
+        //assert the text displayed is valid
+        isSignUpTextAsExpected(signUpPage);
+        //invalid input data getter(all inputs - too long phone number)
+        signUpPage.invalidInputDataAllInputsTooLongPhone();
+        //input valid email
+        signUpPage.inputValidEmailAddress();
+        //input valid password
+        signUpPage.inputValidPassword();
+        //input valid confirm password
+        signUpPage.inputValidConfirmPassword();
+        //input valid full name
+        signUpPage.inputValidFullName();
+        //select 'Premium membership' radio button
+        signUpPage.selectPremiumMembership();
+        //input valid address (this input field will have no further testing due to it not having any input restrictions)
+        signUpPage.inputValidAddress();
+        //input invalid phone number (too long)
+        signUpPage.inputTooLongPhone();
+        //click gender dropdown menu
+        signUpPage.clickGenderDropdownMenu();
+        //select 'male' gender
+        signUpPage.selectMaleGenderOption();
+        //input valid birthdate
+        signUpPage.inputValidBirthdate();
+        //click 'Receive notification' checkbox
+        signUpPage.clickReceiveNotificationCheckbox();
+        //click 'Sign-up' button
+        signUpPage.clickSignUpButton();
+        //assert the expected error message is displayed
+        assertEquals("Please match the requested format.", signUpPage.getInvalidPhoneInputMessage(), "The expected invalid input message isn't displayed.");
+    }
+
 
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage) {
