@@ -71,4 +71,18 @@ public class SignUpPageTest extends TestMethods{
         //invalid user account creation test (the required input only - invalid email address format)
         createInvalidUserAccountRequiredOnlyInputInvalidEmailFormatTest(signUpPage);
     }
+
+    //Test 002e -> invalid user account creation test (the required input only - too short password)
+    @Test
+    @DisplayName("Invalid User Account Creation Test (required input only - too short password)")
+    @Tag("Invalid_User_Account_Creation")
+    @Tag("Required_Input_Only")
+    @Tag("Too_Short_Singular_Input")
+    void invalidAccountRequiredInputOnlyTooShortPasswordTest(){
+        HomePage homePage = new HomePage(driver);
+        navigateToSignUpPageTest(homePage);
+        SignUpPage signUpPage = new SignUpPage(driver);
+        //invalid user account creation test (the required input only - too short password)
+        createInvalidUserAccountRequiredOnlyTooShortPasswordTest(signUpPage);
+    }
 }

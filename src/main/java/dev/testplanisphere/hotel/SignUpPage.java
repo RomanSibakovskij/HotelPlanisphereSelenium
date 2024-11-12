@@ -22,6 +22,8 @@ public class SignUpPage extends BasePage{
     private WebElement passwordInputField;
     @FindBy(xpath = "//small[.='Please lengthen this text to 8 characters.']")
     private WebElement passwordInputHint;
+    @FindBy(xpath = "//div[.='Please lengthen this text to 8 characters or more.']")
+    private WebElement invalidPasswordInput;
     @FindBy(xpath = "//input[@id='password-confirmation']")
     private WebElement confirmPasswordInputField;
     @FindBy(xpath = "//small[.='Please enter your password again to confirm.']")
@@ -68,6 +70,7 @@ public class SignUpPage extends BasePage{
 
     //invalid singular input data (too short)
     private String tooShortPhone;
+    private String tooShortPassword;
     //invalid singular input data (too long)
     private String tooLongPhone;
 
@@ -187,6 +190,20 @@ public class SignUpPage extends BasePage{
         logger.info("Full Name (required input only - invalid email format): " + fullName);
         System.out.println("\n");
     }
+    //invalid input data getter (required input data only - too short password)
+    public void invalidInputDataRequiredOnlyWithTooShortPassword(){
+        email = TestDataGenerator.generateRandomEmailAddress(5);
+        tooShortPassword = "StkR##y";
+        confirmPassword = tooShortPassword;
+        fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
+
+        System.out.println("Invalid input data generated (required input only - too short password): " + "\n");
+        logger.info("Email address (required input only - too short password): " + email);
+        logger.info("Too short password (required input only - too short password): " + password);
+        logger.info("Confirm password (required input only - too short password): " + confirmPassword);
+        logger.info("Full Name (required input only - too short password): " + fullName);
+        System.out.println("\n");
+    }
 
     //valid address input method(this input field has no restrictions)
     public void inputValidAddress(){
@@ -225,6 +242,18 @@ public class SignUpPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(emailInputField));
         emailInputField.sendKeys(invalidEmailFormat);
     }
+    //invalid data input method - too short password
+    public void inputTooShortPassword(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(passwordInputField));
+        passwordInputField.sendKeys(tooShortPassword);
+    }
+    //invalid data input method - too short confirm password
+    public void inputTooShortConfirmPassword(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
+        confirmPasswordInputField.sendKeys(tooShortPassword);
+    }
 
     //'Premium membership' click method
     public void selectPremiumMembership(){premiumMembershipDotCircle.click();}
@@ -245,6 +274,8 @@ public class SignUpPage extends BasePage{
     public String getInvalidPhoneInputMessage(){return invalidPhoneInput.getText();}
     //invalid email format getter
     public String getInvalidEmailFormatMessage(){return invalidEmailFormatInput.getText();}
+    //invalid password input message getter (same for confirm password)
+    public String getInvalidPasswordInputMessage(){return invalidPasswordInput.getText();}
 
     //sign-up button click method
     public void clickSignUpButton(){signUpButton.click();}

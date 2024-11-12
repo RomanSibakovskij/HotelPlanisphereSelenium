@@ -195,6 +195,30 @@ public class TestMethods extends BaseTest{
         //assert the expected error is displayed
         assertEquals("Please enter a non-empty email address.", signUpPage.getInvalidEmailFormatMessage(), "The expected error message doesn't match expectations");
     }
+    //invalid user account creation test method (required only input - too short password)
+    protected void createInvalidUserAccountRequiredOnlyTooShortPasswordTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //sign-up page web element assert
+        isSignUpPageWebElementDisplayed(signUpPage);
+        //assert the text displayed is valid
+        isSignUpTextAsExpected(signUpPage);
+        //invalid input data getter(required input only - too short password)
+        signUpPage.invalidInputDataRequiredOnlyWithTooShortPassword();
+        //input valid email format
+        signUpPage.inputValidEmailAddress();
+        //input too short password
+        signUpPage.inputTooShortPassword();
+        //input too short confirm password
+        signUpPage.inputTooShortConfirmPassword();
+        //input valid full name
+        signUpPage.inputValidFullName();
+        //click 'Sign-up' button
+        signUpPage.clickSignUpButton();
+        //assert the expected error is displayed (for password and confirm password)
+        assertEquals("Please lengthen this text to 8 characters or more.", signUpPage.getInvalidPasswordInputMessage(), "The expected error message doesn't match expectations");
+    }
 
 
     //homepage web element assert test method
