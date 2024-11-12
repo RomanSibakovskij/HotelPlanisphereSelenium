@@ -171,6 +171,30 @@ public class TestMethods extends BaseTest{
         //assert the expected error message is displayed
         assertEquals("Please match the requested format.", signUpPage.getInvalidPhoneInputMessage(), "The expected invalid input message isn't displayed.");
     }
+    //invalid user account creation test method (required only input - invalid email format) (with '@' input and omitting '.' the user account gets created though)
+    protected void createInvalidUserAccountRequiredOnlyInputInvalidEmailFormatTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //sign-up page web element assert
+        isSignUpPageWebElementDisplayed(signUpPage);
+        //assert the text displayed is valid
+        isSignUpTextAsExpected(signUpPage);
+        //invalid input data getter(required input only - invalid email format)
+        signUpPage.invalidInputDataRequiredOnlyInvalidEmailFormat();
+        //input invalid email format
+        signUpPage.inputInvalidEmailAddressFormat();
+        //input valid password
+        signUpPage.inputValidPassword();
+        //input valid confirm password
+        signUpPage.inputValidConfirmPassword();
+        //input valid full name
+        signUpPage.inputValidFullName();
+        //click 'Sign-up' button
+        signUpPage.clickSignUpButton();
+        //assert the expected error is displayed
+        assertEquals("Please enter a non-empty email address.", signUpPage.getInvalidEmailFormatMessage(), "The expected error message doesn't match expectations");
+    }
 
 
     //homepage web element assert test method

@@ -57,4 +57,18 @@ public class SignUpPageTest extends TestMethods{
         //invalid user account creation test (all input - too long phone number)
         createInvalidUserAccountAllInputTooLongPhoneTest(signUpPage);
     }
+
+    //Test 002d -> invalid user account creation test (the required input only - invalid email address format) (with '@' input and omitting '.' the user account gets created though)
+    @Test
+    @DisplayName("Invalid User Account Creation Test (required input only - invalid email address format)")
+    @Tag("Invalid_User_Account_Creation")
+    @Tag("Required_Input_Only")
+    @Tag("Invalid_Singular_Input")
+    void invalidAccountRequiredInputOnlyInvalidEmailFormatTest(){
+        HomePage homePage = new HomePage(driver);
+        navigateToSignUpPageTest(homePage);
+        SignUpPage signUpPage = new SignUpPage(driver);
+        //invalid user account creation test (the required input only - invalid email address format)
+        createInvalidUserAccountRequiredOnlyInputInvalidEmailFormatTest(signUpPage);
+    }
 }

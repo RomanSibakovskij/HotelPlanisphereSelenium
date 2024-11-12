@@ -16,6 +16,8 @@ public class SignUpPage extends BasePage{
     private WebElement requiredBadge;
     @FindBy(xpath = "//input[@id='email']")
     private WebElement emailInputField;
+    @FindBy(xpath = "//div[.='Please enter a non-empty email address.']")
+    private WebElement invalidEmailFormatInput;
     @FindBy(xpath = "//input[@id='password']")
     private WebElement passwordInputField;
     @FindBy(xpath = "//small[.='Please lengthen this text to 8 characters.']")
@@ -68,6 +70,9 @@ public class SignUpPage extends BasePage{
     private String tooShortPhone;
     //invalid singular input data (too long)
     private String tooLongPhone;
+
+    //invalid singular input data (invalid email format)
+    private String invalidEmailFormat;
 
     public SignUpPage(WebDriver driver) {super(driver);}
 
@@ -168,6 +173,20 @@ public class SignUpPage extends BasePage{
         logger.info("Birthdate (all input - too long phone number): " + birthdate);
         System.out.println("\n");
     }
+    //invalid input data getter (required input data only - invalid email format)
+    public void invalidInputDataRequiredOnlyInvalidEmailFormat(){
+        invalidEmailFormat = "m991example.com";
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+        fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
+
+        System.out.println("Invalid input data generated (required input only - invalid email format): " + "\n");
+        logger.info("Invalid email address (required input only - invalid email format): " + invalidEmailFormat);
+        logger.info("Password (required input only - invalid email format): " + password);
+        logger.info("Confirm password (required input only - invalid email format): " + confirmPassword);
+        logger.info("Full Name (required input only - invalid email format): " + fullName);
+        System.out.println("\n");
+    }
 
     //valid address input method(this input field has no restrictions)
     public void inputValidAddress(){
@@ -200,6 +219,12 @@ public class SignUpPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(phoneInputField));
         phoneInputField.sendKeys(tooLongPhone);
     }
+    //invalid data input method - invalid email address format
+    public void inputInvalidEmailAddressFormat(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(invalidEmailFormat);
+    }
 
     //'Premium membership' click method
     public void selectPremiumMembership(){premiumMembershipDotCircle.click();}
@@ -218,6 +243,8 @@ public class SignUpPage extends BasePage{
 
     //invalid phone input getter
     public String getInvalidPhoneInputMessage(){return invalidPhoneInput.getText();}
+    //invalid email format getter
+    public String getInvalidEmailFormatMessage(){return invalidEmailFormatInput.getText();}
 
     //sign-up button click method
     public void clickSignUpButton(){signUpButton.click();}
