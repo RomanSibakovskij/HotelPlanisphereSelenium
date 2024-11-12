@@ -180,7 +180,7 @@ public class TestMethods extends BaseTest{
         isSignUpPageWebElementDisplayed(signUpPage);
         //assert the text displayed is valid
         isSignUpTextAsExpected(signUpPage);
-        //invalid input data getter(required input only - invalid email format)
+        //invalid input data getter(the required input only - invalid email format)
         signUpPage.invalidInputDataRequiredOnlyInvalidEmailFormat();
         //input invalid email format
         signUpPage.inputInvalidEmailAddressFormat();
@@ -204,7 +204,7 @@ public class TestMethods extends BaseTest{
         isSignUpPageWebElementDisplayed(signUpPage);
         //assert the text displayed is valid
         isSignUpTextAsExpected(signUpPage);
-        //invalid input data getter(required input only - too short password)
+        //invalid input data getter(the required input only - too short password)
         signUpPage.invalidInputDataRequiredOnlyWithTooShortPassword();
         //input valid email format
         signUpPage.inputValidEmailAddress();
@@ -218,6 +218,30 @@ public class TestMethods extends BaseTest{
         signUpPage.clickSignUpButton();
         //assert the expected error is displayed (for password and confirm password)
         assertEquals("Please lengthen this text to 8 characters or more.", signUpPage.getInvalidPasswordInputMessage(), "The expected error message doesn't match expectations");
+    }
+    //invalid user account creation test method (required only input - mismatching confirm password)
+    protected void createInvalidUserAccountRequiredOnlyMismatchingConfirmPasswordTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //sign-up page web element assert
+        isSignUpPageWebElementDisplayed(signUpPage);
+        //assert the text displayed is valid
+        isSignUpTextAsExpected(signUpPage);
+        //invalid input data getter(the required input only - mismatching confirm password)
+        signUpPage.invalidInputDataRequiredOnlyWithMismatchingConfirmPassword();
+        //input valid email format
+        signUpPage.inputValidEmailAddress();
+        //input password
+        signUpPage.inputValidPassword();
+        //input mismatching confirm password
+        signUpPage.inputMismatchingConfirmPassword();
+        //input valid full name
+        signUpPage.inputValidFullName();
+        //click 'Sign-up' button
+        signUpPage.clickSignUpButton();
+        //assert the expected error is displayed (for mismatching confirm password)
+        assertEquals("Password doesn't match.", signUpPage.getMismatchingConfirmPasswordMessage(), "The expected error message doesn't match expectations");
     }
 
 
