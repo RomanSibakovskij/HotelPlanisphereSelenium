@@ -41,6 +41,13 @@ public class TestMethods extends BaseTest{
         signUpPage.inputValidFullName();
         //click 'Sign-up' button
         signUpPage.clickSignUpButton();
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        //assert the user gets on 'My account' page
+        assertEquals("MyPage", myAccountPage.getMyAccountPageTitle(), "The 'My account' page title doesn't match expectations or the user is on the wrong page");
+        //my account web element assert
+        isMyAccountPageWebElementDisplayed(myAccountPage);
+        //log the displayed 'My account' table data
+        logMyAccountDisplayedData(myAccountPage);
     }
 
     //homepage web element assert test method
@@ -130,6 +137,24 @@ public class TestMethods extends BaseTest{
         assertEquals("Please enter your password again to confirm.", signUpPage.getConfirmPasswordInputHint(), "The confirm password input hint text doesn't match expectations");
         //assert phone input hint is as expected
         assertEquals("Please enter 11-digit number. Ex: 01133335555", signUpPage.getPhoneInputHint(), "The phone input hint text doesn't match expectations");
+    }
+
+    //my account page web element assert test method
+    protected void isMyAccountPageWebElementDisplayed(MyAccountPage myAccountPage) {
+        //assert 'My account' page title displayed
+        assertTrue(myAccountPage.isMyAccountPageTitleDisplayed(), "The 'My Account' page title isn't displayed");
+        //assert 'Icon setting' button is displayed
+        assertTrue(myAccountPage.isIconSettingButtonDisplayed(), "The 'Icon setting' button isn't displayed");
+        //assert 'Delete account' button is displayed
+        assertTrue(myAccountPage.isDeleteAccountButtonDisplayed(), "The 'Delete account' button isn't displayed");
+        //assert 'My account' data table elements are displayed
+        assertTrue(myAccountPage.isMyAccountDataTableElementDisplayed(), "The 'My account' data table elements aren't displayed");
+    }
+    //'My account' logger method
+    protected void logMyAccountDisplayedData(MyAccountPage myAccountPage) {
+        System.out.println("My account displayed data: " + "\n");
+        logger.info(String.valueOf(myAccountPage.getMyAccountTableData()));
+        System.out.println("\n");
     }
 
     //general page web element assert test method

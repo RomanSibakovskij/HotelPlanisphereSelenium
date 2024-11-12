@@ -5,9 +5,45 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
+import java.util.*;
 
 public class MyAccountPage extends BasePage{
 
+    //my account page web elements
+    @FindBy(xpath = "//div[@class='row'][1]//h2")
+    private WebElement myAccountPageTitle;
+    //my account page data table elements
+    @FindBy(xpath = "//ul[@class='list-group']/li")
+    private List<WebElement> myAccountDataTableElements;
+    //my account page button web elements
+    @FindBy(xpath = "//a[@role='button']")
+    private WebElement iconSettingButton;
+    @FindBy(xpath = "//button[.='Delete Account']")
+    private WebElement deleteAccountButton;
+
     public MyAccountPage(WebDriver driver) {super(driver);}
 
+    //my account page title getter
+    public String getMyAccountPageTitle() {return myAccountPageTitle.getText();}
+    //my account page table data elements getter
+    public List<String> getMyAccountTableData() {
+        List<String> myAccountTableData = new ArrayList<>();
+        for (WebElement element : myAccountDataTableElements) {
+            myAccountTableData.add(element.getText());
+        }
+        return myAccountTableData;
+    }
+
+    //my account page web element assert method
+    public boolean isMyAccountPageTitleDisplayed(){return myAccountPageTitle.isDisplayed();}
+    public boolean isIconSettingButtonDisplayed(){return iconSettingButton.isDisplayed();}
+    public boolean isDeleteAccountButtonDisplayed(){return deleteAccountButton.isDisplayed();}
+    public boolean isMyAccountDataTableElementDisplayed() {
+        for (WebElement element : myAccountDataTableElements) {
+            if (!element.isDisplayed()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
