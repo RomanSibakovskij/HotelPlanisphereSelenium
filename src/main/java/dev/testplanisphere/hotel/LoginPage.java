@@ -15,6 +15,8 @@ public class LoginPage extends BasePage{
     private WebElement emailInputField;
     @FindBy(xpath = "//div[.='Email or password is invalid.']")
     private WebElement invalidLoginInputMessage;
+    @FindBy(xpath = "//div[.='Please fill out this field.']")
+    private WebElement missingSingularInputMessage;
     @FindBy(xpath = "//input[@id='password']")
     private WebElement passwordInputField;
     @FindBy(xpath = "//button[@id='login-button']")
@@ -27,6 +29,9 @@ public class LoginPage extends BasePage{
     //invalid singular input data
     private String invalidLoginEmail;
     private String invalidLoginPassword;
+
+    //missing singular input data
+    private String noLoginEmail;
 
     public LoginPage(WebDriver driver) {super(driver);}
 
@@ -53,6 +58,7 @@ public class LoginPage extends BasePage{
         passwordInputField.sendKeys(validLoginPassword);
     }
 
+    //invalid login data input
     //invalid login input data getter - invalid email address
     public void invalidLoginInputDataWithRequiredOnlyInvalidEmailGetter(SignUpPage signUpPage) {
         invalidLoginEmail = "vb@example.com";
@@ -87,6 +93,24 @@ public class LoginPage extends BasePage{
         passwordInputField.sendKeys(invalidLoginPassword);
     }
 
+    //no singular input
+    //invalid login input data getter - no email address
+    public void invalidLoginInputDataWithRequiredOnlyNoEmailGetter(SignUpPage signUpPage) {
+        noLoginEmail = "";
+        validLoginPassword = signUpPage.getValidUserPassword();
+
+        System.out.println("Invalid user login data (required only inputs - no login email): " + "\n");
+        logger.info("No user login email (required only inputs - no login email): " + noLoginEmail);
+        logger.info("Valid user login password (required only inputs - no login email): " + validLoginPassword);
+        System.out.println("\n");
+    }
+    //invalid user login email input method - no email address
+    public void inputNoEmailAddress(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(noLoginEmail);
+    }
+
     //click 'Login' button method
     public void clickLoginButton(){loginButton.click();}
 
@@ -95,6 +119,8 @@ public class LoginPage extends BasePage{
 
     //invalid singular input message getter
     public String getInvalidLoginInputMessage(){return invalidLoginInputMessage.getText();}
+    //missing singular input message getter
+    public String getMissingSingularInputMessage(){return missingSingularInputMessage.getText();}
 
     //login web element assert methods
     public boolean isLoginPageTitleDisplayed() {return loginPageTitle.isDisplayed();}

@@ -245,7 +245,6 @@ public class TestMethods extends BaseTest{
     }
 
     //no singular input test methods
-
     //invalid user account creation test method (required only input - already used email address)
     protected void createInvalidUserAccountRequiredOnlyInputNoEmailFormatTest(SignUpPage signUpPage){
         HomePage homePage = new HomePage(driver);
@@ -320,7 +319,6 @@ public class TestMethods extends BaseTest{
     }
 
     //valid user logout test
-
     //logout test method
     protected void userLogOutTest(MyAccountPage myAccountPage){
         HomePage homePage = new HomePage(driver);
@@ -335,7 +333,6 @@ public class TestMethods extends BaseTest{
     }
 
     //valid login test
-
     //valid user login test method(required input only)
     protected void validUserLoginWithRequiredInputOnlyTest(SignUpPage signUpPage){
         HomePage homePage = new HomePage(driver);
@@ -364,7 +361,6 @@ public class TestMethods extends BaseTest{
     }
 
     //invalid login tests
-
     //invalid user login test method(the required input only - invalid email address)
     protected void invalidUserLoginWithRequiredInputOnlyInvalidEmailTest(SignUpPage signUpPage){
         HomePage homePage = new HomePage(driver);
@@ -414,6 +410,33 @@ public class TestMethods extends BaseTest{
         loginPage.clickLoginButton();
         //assert the user gets the expected error message
         assertEquals("Email or password is invalid.", loginPage.getInvalidLoginInputMessage(), "The invalid login input error message doesn't match expectations");
+    }
+
+    //no singular input test methods
+    //invalid user login test method(the required input only - no email address)
+    protected void invalidUserLoginWithRequiredInputOnlyNoEmailTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //click 'Login' link
+        homePage.clickNavbarLoginLink();
+        //assert the user gets onto login page
+        assertEquals("Login", loginPage.getLoginPageTitle(), "The login page title doesn't match expectations or the user isn't on the login page");
+        //login page web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //invalid login input data getter (no email address)
+        loginPage.invalidLoginInputDataWithRequiredOnlyNoEmailGetter(signUpPage);
+        //don't input email
+        loginPage.inputNoEmailAddress();
+        //input valid password
+        loginPage.inputValidPassword();
+        //click 'Login' button
+        loginPage.clickLoginButton();
+        //assert the user gets the expected error message
+        assertEquals("Please fill out this field.", loginPage.getMissingSingularInputMessage(), "The invalid login input error message doesn't match expectations");
     }
 
     //homepage web element assert test method
