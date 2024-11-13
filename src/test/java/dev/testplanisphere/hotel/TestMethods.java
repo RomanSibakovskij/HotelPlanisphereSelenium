@@ -365,7 +365,7 @@ public class TestMethods extends BaseTest{
 
     //invalid login tests
 
-    //invalid user login test method(required input only - invalid email address)
+    //invalid user login test method(the required input only - invalid email address)
     protected void invalidUserLoginWithRequiredInputOnlyInvalidEmailTest(SignUpPage signUpPage){
         HomePage homePage = new HomePage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -385,6 +385,31 @@ public class TestMethods extends BaseTest{
         loginPage.inputInvalidEmailAddress();
         //input valid password
         loginPage.inputValidPassword();
+        //click 'Login' button
+        loginPage.clickLoginButton();
+        //assert the user gets the expected error message
+        assertEquals("Email or password is invalid.", loginPage.getInvalidLoginInputMessage(), "The invalid login input error message doesn't match expectations");
+    }
+    //invalid user login test method(the required input only - invalid password)
+    protected void invalidUserLoginWithRequiredInputOnlyInvalidPasswordTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //click 'Login' link
+        homePage.clickNavbarLoginLink();
+        //assert the user gets onto login page
+        assertEquals("Login", loginPage.getLoginPageTitle(), "The login page title doesn't match expectations or the user isn't on the login page");
+        //login page web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //invalid login input data getter (invalid password)
+        loginPage.invalidLoginInputDataWithRequiredOnlyInvalidPasswordGetter(signUpPage);
+        //input valid email
+        loginPage.inputValidEmailAddress();
+        //input invalid password
+        loginPage.inputInvalidPassword();
         //click 'Login' button
         loginPage.clickLoginButton();
         //assert the user gets the expected error message

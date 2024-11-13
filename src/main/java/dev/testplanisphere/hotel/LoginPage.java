@@ -26,6 +26,7 @@ public class LoginPage extends BasePage{
 
     //invalid singular input data
     private String invalidLoginEmail;
+    private String invalidLoginPassword;
 
     public LoginPage(WebDriver driver) {super(driver);}
 
@@ -52,12 +53,12 @@ public class LoginPage extends BasePage{
         passwordInputField.sendKeys(validLoginPassword);
     }
 
-    //invalid login input data
+    //invalid login input data getter - invalid email address
     public void invalidLoginInputDataWithRequiredOnlyInvalidEmailGetter(SignUpPage signUpPage) {
         invalidLoginEmail = "vb@example.com";
         validLoginPassword = signUpPage.getValidUserPassword();
 
-        System.out.println("Valid user login data (required only inputs - invalid login email): " + "\n");
+        System.out.println("Invalid user login data (required only inputs - invalid login email): " + "\n");
         logger.info("Invalid user login email (required only inputs - invalid login email): " + invalidLoginEmail);
         logger.info("Valid user login password (required only inputs - invalid login email): " + validLoginPassword);
         System.out.println("\n");
@@ -67,6 +68,23 @@ public class LoginPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
         wait.until(ExpectedConditions.visibilityOf(emailInputField));
         emailInputField.sendKeys(invalidLoginEmail);
+    }
+
+    //invalid login input data getter - invalid password
+    public void invalidLoginInputDataWithRequiredOnlyInvalidPasswordGetter(SignUpPage signUpPage) {
+        validLoginEmail = signUpPage.getValidUserEmail();
+        invalidLoginPassword = "Karkgr##23";
+
+        System.out.println("Invalid user login data (required only inputs - invalid login password): " + "\n");
+        logger.info("Valid user login email (required only inputs - invalid login password): " + validLoginEmail);
+        logger.info("Invalid user login password (required only inputs - invalid login password): " + invalidLoginPassword);
+        System.out.println("\n");
+    }
+    //invalid user login password input method
+    public void inputInvalidPassword(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(passwordInputField));
+        passwordInputField.sendKeys(invalidLoginPassword);
     }
 
     //click 'Login' button method
