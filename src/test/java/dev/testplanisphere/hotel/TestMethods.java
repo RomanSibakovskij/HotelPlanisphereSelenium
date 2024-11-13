@@ -317,6 +317,42 @@ public class TestMethods extends BaseTest{
         //assert the expected error is displayed
         assertEquals("Please fill out this field.", signUpPage.getMissingSingularInputMessage(), "The expected error message doesn't match expectations");
     }
+    //invalid user account creation test method (required only input - already used email beforehand)
+    protected void invalidUserAccountWithAlreadyUsedEmail(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //sign-up page web element assert
+        isSignUpPageWebElementDisplayed(signUpPage);
+        //assert the text displayed is valid
+        isSignUpTextAsExpected(signUpPage);
+        //invalid input data getter(required input only i with the already used email address)
+        signUpPage.invalidInputDataRequiredOnlyUsedEmail(signUpPage);
+        //input used email beforehand
+        signUpPage.inputAlreadyUsedEmailAddress();
+        //input valid password
+        signUpPage.inputValidPassword();
+        //input valid confirm password
+        signUpPage.inputValidConfirmPassword();
+        //input valid full name
+        signUpPage.inputValidFullName();
+        //click 'Sign-up' button
+        signUpPage.clickSignUpButton();
+        //assert the user gets the expected error message
+        assertEquals("Email has already been taken.", signUpPage.getAlreadyUsedEmailMessage(), "The error message doesn't match expectations");
+    }
+    //re-navigate to 'Sign-up' page test method
+    protected void returnToSignUpPageTest(HomePage homePage){
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //click navbar 'Sign-up' link
+        homePage.clickSignUpLink();
+        SignUpPage signUpPage = new SignUpPage(driver);
+        //assert the user returns to sign-up page
+        assertEquals("Sign up", signUpPage.getSignUpPageTitle(), "The 'Sign-up' page title doesn't match expectations or the user is on the wrong page");
+    }
 
     //valid user logout test
     //logout test method

@@ -20,6 +20,8 @@ public class SignUpPage extends BasePage{
     private WebElement emailInputField;
     @FindBy(xpath = "//div[.='Please enter a non-empty email address.']")
     private WebElement invalidEmailFormatInput;
+    @FindBy(xpath = "//div[.='Email has already been taken.']")
+    private WebElement alreadyUsedEmailInput;
     @FindBy(xpath = "//input[@id='password']")
     private WebElement passwordInputField;
     @FindBy(xpath = "//small[.='Please lengthen this text to 8 characters.']")
@@ -79,6 +81,8 @@ public class SignUpPage extends BasePage{
     private String tooLongPhone;
     //invalid singular input data (invalid email format)
     private String invalidEmailFormat;
+    //invalid singular input data (already used meail beforehand)
+    private String usedEmail;
     //invalid singular input data (mismatching confirm password)
     private String mismatchingConfirmPassword;
     //missing singular input data
@@ -273,6 +277,20 @@ public class SignUpPage extends BasePage{
         logger.info("No full Name (required input only - no full name): " + noFullName);
         System.out.println("\n");
     }
+    //invalid input data getter (required input data only - with already used email beforehand)
+    public void invalidInputDataRequiredOnlyUsedEmail(SignUpPage signUpPage){
+        usedEmail = signUpPage.getValidUserEmail();
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+        fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
+
+        System.out.println("Invalid input data generated (required input only - with already used email address): " + "\n");
+        logger.info("Used email address (required input only - with already used email address): " + email);
+        logger.info("Password (required input only - with already used email address): " + password);
+        logger.info("Confirm password (required input only - with already used email address): " + confirmPassword);
+        logger.info("Full Name (required input only - with already used email address): " + fullName);
+        System.out.println("\n");
+    }
 
     //valid address input method(this input field has no restrictions)
     public void inputValidAddress(){
@@ -310,6 +328,12 @@ public class SignUpPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
         wait.until(ExpectedConditions.visibilityOf(emailInputField));
         emailInputField.sendKeys(invalidEmailFormat);
+    }
+    //invalid data input method - already used email address format
+    public void inputAlreadyUsedEmailAddress(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(usedEmail);
     }
     //invalid data input method - too short password
     public void inputTooShortPassword(){
@@ -378,8 +402,10 @@ public class SignUpPage extends BasePage{
     public String getInvalidPasswordInputMessage(){return invalidPasswordInput.getText();}
     //mismatching confirm password input message getter
     public String getMismatchingConfirmPasswordMessage(){return mismatchingConfirmPasswordInput.getText();}
-    //already used email input message getter
+    //missing singular input message getter
     public String getMissingSingularInputMessage(){return missingSingularInput.getText();}
+    //already used email message getter
+    public String getAlreadyUsedEmailMessage(){return alreadyUsedEmailInput.getText();}
 
     //sign-up button click method
     public void clickSignUpButton(){signUpButton.click();}

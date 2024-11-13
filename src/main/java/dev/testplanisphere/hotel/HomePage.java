@@ -16,6 +16,9 @@ public class HomePage extends BasePage{
     private WebElement homePageDescriptorTitle;
     //navbar elements
     private List<WebElement> homePageNavLinkElements = driver.findElements(By.xpath("//div[@id='navbarNav']/ul/li/a"));
+    //sign-up link(for the second run)
+    @FindBy(xpath = "(//div[@id='navbarNav']/ul/li/a[@class='nav-link'])[3]")
+    private WebElement signUpLink;
     //example codes section elements
     @FindBy(xpath = "//body[@class='bg-light']/div/div[3]//h3")
     private WebElement exampleCodesSectionTitle;
@@ -66,15 +69,21 @@ public class HomePage extends BasePage{
     public HomePage(WebDriver driver) {super(driver);}
 
     //homepage navbar link click method
-    public void clickNavbarLink(int productIndex) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
-        wait.until(ExpectedConditions.elementToBeClickable(homePageNavLinkElements.get(productIndex)));
-        homePageNavLinkElements.get(productIndex).click();
+    public void clickNavbarLink(int navbarLinkIndex) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(700));
+        wait.until(ExpectedConditions.elementToBeClickable(homePageNavLinkElements.get(navbarLinkIndex)));
+        homePageNavLinkElements.get(navbarLinkIndex).click();
     }
     //click navbar 'sign-up' link method
     public void clickNavbarSignUpLink(){clickNavbarLink(2);}
     //click navbar 'Login' link method
     public void clickNavbarLoginLink(){clickNavbarLink(4);}
+    //click 'sign-up' link method (for the already used email test scenario)
+    public void clickSignUpLink(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(700));
+        wait.until(ExpectedConditions.elementToBeClickable(signUpLink));
+        signUpLink.click();
+    }
 
     //homepage descriptor title getter
     public String getHomePageDescriptorTitle(){return homePageDescriptorTitle.getText();}
