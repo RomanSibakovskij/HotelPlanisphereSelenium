@@ -83,6 +83,8 @@ public class SignUpPage extends BasePage{
     private String mismatchingConfirmPassword;
     //missing singular input data
     private String noEmail;
+    private String noPassword;
+    private String noConfirmPassword;
 
     public SignUpPage(WebDriver driver) {super(driver);}
 
@@ -230,16 +232,30 @@ public class SignUpPage extends BasePage{
 
     //invalid input data getter (required input data only - no email address)
     public void invalidInputDataRequiredOnlyNoEmail(){
-        noEmail = " ";
+        noEmail = "";
         password = TestDataGenerator.generateRandomPassword();
         confirmPassword = password;
         fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
 
-        System.out.println("Valid input data generated (required input only - no email address): " + "\n");
-        logger.info("Used email address (required input only - no email address): " + noEmail);
+        System.out.println("Invalid input data generated (required input only - no email address): " + "\n");
+        logger.info("No email address (required input only - no email address): " + noEmail);
         logger.info("Password (required input only - no email address): " + password);
         logger.info("Confirm password (required input only - no email address): " + confirmPassword);
         logger.info("Full Name (required input only - no email address): " + fullName);
+        System.out.println("\n");
+    }
+    //invalid input data getter (required input data only - no password and confirm password)
+    public void invalidInputDataRequiredOnlyNoPasswordAndNoConfirm(){
+        email = TestDataGenerator.generateRandomEmailAddress(5);
+        noPassword = "";
+        noConfirmPassword = noPassword;
+        fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
+
+        System.out.println("Invalid input data generated (required input only - no password and confirm password): " + "\n");
+        logger.info("Email address (required input only - no password and confirm password): " + email);
+        logger.info("No password (required input only - no password and confirm password): " + noPassword);
+        logger.info("No confirm password (required input only - no password and confirm password): " + noConfirmPassword);
+        logger.info("Full Name (required input only - no password and confirm password): " + fullName);
         System.out.println("\n");
     }
 
@@ -304,6 +320,18 @@ public class SignUpPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
         wait.until(ExpectedConditions.visibilityOf(emailInputField));
         emailInputField.sendKeys(noEmail);
+    }
+    //invalid data input method - no password
+    public void inputNoPassword(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(passwordInputField));
+        passwordInputField.sendKeys(noPassword);
+    }
+    //invalid data input method - no confirm password
+    public void inputNoConfirmPassword(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
+        confirmPasswordInputField.sendKeys(noConfirmPassword);
     }
 
     //'Premium membership' click method
