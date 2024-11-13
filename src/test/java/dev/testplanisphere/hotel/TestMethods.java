@@ -500,6 +500,50 @@ public class TestMethods extends BaseTest{
         assertEquals("Please fill out this field.", loginPage.getMissingSingularInputMessage(), "The invalid login input error message doesn't match expectations");
     }
 
+    //user account deletion
+    //valid user account deletion test method
+    protected void deleteValidUserAccountTest(MyAccountPage myAccountPage){
+        HomePage homePage = new HomePage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //my account page web element assert
+        isMyAccountPageWebElementDisplayed(myAccountPage);
+        //click 'Delete account' button
+        myAccountPage.clickDeleteAccountButton();
+        //click 'OK' button for account deletion confirmation (Google modal)
+        myAccountPage.clickModalOKButton();
+        //click 'OK' again for confirmation
+        myAccountPage.clickModalOKButton();
+        //assert the user has returned to homepage
+        assertEquals("This site is a sandbox to practice test automation.", homePage.getHomePageDescriptorTitle(), "The homepage descriptor title doesn't match expectations or the user hasn't returned to homepage");
+    }
+    //re-login with old credentials to confirm user account deletion test method
+    protected void confirmUserAccountDeletionTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //click 'Login' link
+        homePage.clickNavbarLoginLink();
+        //assert the user gets onto login page
+        assertEquals("Login", loginPage.getLoginPageTitle(), "The login page title doesn't match expectations or the user isn't on the login page");
+        //login page web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //valid login input data getter
+        loginPage.validLoginInputDataWithRequiredOnlyGetter(signUpPage);
+        //input valid email
+        loginPage.inputValidEmailAddress();
+        //input valid password
+        loginPage.inputValidPassword();
+        //click 'Login' button
+        loginPage.clickLoginButton();
+        //assert the expected error message appears and login fails
+        assertEquals("Email or password is invalid.", loginPage.getInvalidLoginInputMessage(), "The invalid login input error message doesn't match expectations");
+    }
+
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage) {
         //assert homepage descriptor title is displayed

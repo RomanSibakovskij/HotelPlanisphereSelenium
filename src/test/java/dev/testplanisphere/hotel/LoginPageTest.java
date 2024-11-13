@@ -123,4 +123,28 @@ public class LoginPageTest extends TestMethods{
         //invalid user login test - no password
         invalidUserLoginWithRequiredInputOnlyNoPasswordTest(signUpPage);
     }
+
+    //user account deletion
+    //Test 005 -> valid user account deletion test (the required input only)
+    @Test
+    @DisplayName("Valid User Account Deletion Test (required input only)")
+    @Tag("Valid_User_Account_Deletion")
+    @Tag("Required_Input_Only")
+    void validUserAccountRequiredInputOnlyDeletionTest(){
+        HomePage homePage = new HomePage(driver);
+        SignUpPage signUpPage = new SignUpPage(driver);
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        //navigate to sign-up page test
+        navigateToSignUpPageTest(homePage);
+        //valid user account creation test (required only)
+        createValidUserAccountRequiredOnlyInputTest(signUpPage);
+        //user logout test
+        userLogOutTest(myAccountPage);
+        //valid user login test
+        validUserLoginWithRequiredInputOnlyTest(signUpPage);
+        //user account deletion
+        deleteValidUserAccountTest(myAccountPage);
+        //confirm user account deletion by attempting to re-login with previous credentials
+        confirmUserAccountDeletionTest(signUpPage);
+    }
 }

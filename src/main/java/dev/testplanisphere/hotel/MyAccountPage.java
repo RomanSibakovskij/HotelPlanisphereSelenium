@@ -23,6 +23,9 @@ public class MyAccountPage extends BasePage{
     private WebElement iconSettingButton;
     @FindBy(xpath = "//button[.='Delete Account']")
     private WebElement deleteAccountButton;
+    //google modal 'OK' button element
+    @FindBy(xpath = "//button[contains(text(), 'OK')]")
+    private WebElement modalOKButton;
 
     public MyAccountPage(WebDriver driver) {super(driver);}
 
@@ -39,6 +42,14 @@ public class MyAccountPage extends BasePage{
 
     //logout button click method
     public void clickLogOutButton() {logOutButton.click();}
+
+    //'Delete account' button click method
+    public void clickDeleteAccountButton() {deleteAccountButton.click();}
+    //click Google modal 'OK' button method (to confirm account deletion)
+    public void clickModalOKButton() {
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+    }
 
     //my account page web element assert method
     public boolean isMyAccountPageTitleDisplayed(){return myAccountPageTitle.isDisplayed();}
