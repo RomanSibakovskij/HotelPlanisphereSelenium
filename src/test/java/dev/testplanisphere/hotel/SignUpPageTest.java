@@ -11,6 +11,7 @@ public class SignUpPageTest extends TestMethods{
     @Tag("Required_Input_Only")
     void validAccountRequiredInputOnlyCreationTest(){
         HomePage homePage = new HomePage(driver);
+        //navigate to sign-up page test
         navigateToSignUpPageTest(homePage);
         SignUpPage signUpPage = new SignUpPage(driver);
         //valid user account creation test (required only)
@@ -24,6 +25,7 @@ public class SignUpPageTest extends TestMethods{
     @Tag("All_Input_Only")
     void validAccountRequiredAllInputCreationTest(){
         HomePage homePage = new HomePage(driver);
+        //navigate to sign-up page test
         navigateToSignUpPageTest(homePage);
         SignUpPage signUpPage = new SignUpPage(driver);
         //valid user account creation test (all input)
@@ -38,6 +40,7 @@ public class SignUpPageTest extends TestMethods{
     @Tag("Too_Short_Singular_Input")
     void invalidAccountRequiredAllInputTooShortPhoneCreationTest(){
         HomePage homePage = new HomePage(driver);
+        //navigate to sign-up page test
         navigateToSignUpPageTest(homePage);
         SignUpPage signUpPage = new SignUpPage(driver);
         //invalid user account creation test (all input - too short phone number)
@@ -52,6 +55,7 @@ public class SignUpPageTest extends TestMethods{
     @Tag("Too_Long_Singular_Input")
     void invalidAccountRequiredAllInputTooLongPhoneCreationTest(){
         HomePage homePage = new HomePage(driver);
+        //navigate to sign-up page test
         navigateToSignUpPageTest(homePage);
         SignUpPage signUpPage = new SignUpPage(driver);
         //invalid user account creation test (all input - too long phone number)
@@ -66,6 +70,7 @@ public class SignUpPageTest extends TestMethods{
     @Tag("Invalid_Singular_Input")
     void invalidAccountRequiredInputOnlyInvalidEmailFormatTest(){
         HomePage homePage = new HomePage(driver);
+        //navigate to sign-up page test
         navigateToSignUpPageTest(homePage);
         SignUpPage signUpPage = new SignUpPage(driver);
         //invalid user account creation test (the required input only - invalid email address format)
@@ -80,6 +85,7 @@ public class SignUpPageTest extends TestMethods{
     @Tag("Too_Short_Singular_Input")
     void invalidAccountRequiredInputOnlyTooShortPasswordTest(){
         HomePage homePage = new HomePage(driver);
+        //navigate to sign-up page test
         navigateToSignUpPageTest(homePage);
         SignUpPage signUpPage = new SignUpPage(driver);
         //invalid user account creation test (the required input only - too short password)
@@ -94,9 +100,27 @@ public class SignUpPageTest extends TestMethods{
     @Tag("Mismatching_Singular_Input")
     void invalidAccountRequiredInputOnlyMismatchingConfirmPasswordTest(){
         HomePage homePage = new HomePage(driver);
+        //navigate to sign-up page test
         navigateToSignUpPageTest(homePage);
         SignUpPage signUpPage = new SignUpPage(driver);
         //invalid user account creation test (the required input only - mismatching confirm password)
         createInvalidUserAccountRequiredOnlyMismatchingConfirmPasswordTest(signUpPage);
+    }
+
+    //no singular input tests
+
+    //Test 002g -> invalid user account creation test (the required input only - no email address)
+    @Test
+    @DisplayName("Invalid User Account Creation Test (required input only - no email address)")
+    @Tag("Invalid_User_Account_Creation")
+    @Tag("Required_Input_Only")
+    @Tag("No_Singular_Input")
+    void invalidAccountRequiredInputOnlyNoEmailFormatTest(){
+        HomePage homePage = new HomePage(driver);
+        //navigate to sign-up page test
+        navigateToSignUpPageTest(homePage);
+        SignUpPage signUpPage = new SignUpPage(driver);
+        //invalid user account creation test (the required input only - missing email address)
+        createInvalidUserAccountRequiredOnlyInputNoEmailFormatTest(signUpPage);
     }
 }

@@ -244,6 +244,32 @@ public class TestMethods extends BaseTest{
         assertEquals("Password doesn't match.", signUpPage.getMismatchingConfirmPasswordMessage(), "The expected error message doesn't match expectations");
     }
 
+    //no singular input test methods
+
+    //invalid user account creation test method (required only input - already used email address)
+    protected void createInvalidUserAccountRequiredOnlyInputNoEmailFormatTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //sign-up page web element assert
+        isSignUpPageWebElementDisplayed(signUpPage);
+        //assert the text displayed is valid
+        isSignUpTextAsExpected(signUpPage);
+        //invalid input data getter(the required input only - no email address)
+        signUpPage.invalidInputDataRequiredOnlyNoEmail();
+        //don't input email
+        signUpPage.inputNoEmailAddress();
+        //input valid password
+        signUpPage.inputValidPassword();
+        //input valid confirm password
+        signUpPage.inputValidConfirmPassword();
+        //input valid full name
+        signUpPage.inputValidFullName();
+        //click 'Sign-up' button
+        signUpPage.clickSignUpButton();
+        //assert the expected error is displayed
+        assertEquals("Please fill out this field.", signUpPage.getMissingSingularInputMessage(), "The expected error message doesn't match expectations");
+    }
 
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage) {
