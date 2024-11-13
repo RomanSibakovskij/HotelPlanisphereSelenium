@@ -93,7 +93,7 @@ public class TestMethods extends BaseTest{
         logMyAccountDisplayedData(myAccountPage);
     }
 
-    //negative user account creation methods
+    //negative user account creation tests
 
     //invalid user account creation test method (all input - too short phone number)
     protected void createInvalidUserAccountAllInputTooShortPhoneTest(SignUpPage signUpPage){

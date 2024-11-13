@@ -71,6 +71,8 @@ public class HomePage extends BasePage{
     }
     //click navbar 'sign-up' link method
     public void clickNavbarSignUpLink(){clickNavbarLink(2);}
+    //click 'Logout' button method
+    public void clickNavbarLogoutLink(){clickNavbarLink(3);}
 
 
     //homepage web element assert methods
