@@ -138,4 +138,19 @@ public class SignUpPageTest extends TestMethods{
         //invalid user account creation test (the required input only - no password and confirm password)
         createInvalidUserAccountRequiredOnlyInputNoPasswordAndConfirm(signUpPage);
     }
+
+    //Test 002i -> invalid user account creation test (the required input only - no full name)
+    @Test
+    @DisplayName("Invalid User Account Creation Test (required input only - no full name)")
+    @Tag("Invalid_User_Account_Creation")
+    @Tag("Required_Input_Only")
+    @Tag("No_Singular_Input")
+    void invalidAccountRequiredInputOnlyNoFullNameTest(){
+        HomePage homePage = new HomePage(driver);
+        //navigate to sign-up page test
+        navigateToSignUpPageTest(homePage);
+        SignUpPage signUpPage = new SignUpPage(driver);
+        //invalid user account creation test (the required input only - no full name)
+        createInvalidUserAccountRequiredOnlyInputNoFullNameTest(signUpPage);
+    }
 }

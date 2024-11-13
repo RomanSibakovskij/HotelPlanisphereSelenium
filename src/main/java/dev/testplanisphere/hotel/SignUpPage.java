@@ -85,6 +85,7 @@ public class SignUpPage extends BasePage{
     private String noEmail;
     private String noPassword;
     private String noConfirmPassword;
+    private String noFullName;
 
     public SignUpPage(WebDriver driver) {super(driver);}
 
@@ -258,6 +259,20 @@ public class SignUpPage extends BasePage{
         logger.info("Full Name (required input only - no password and confirm password): " + fullName);
         System.out.println("\n");
     }
+    //invalid input data getter (required input data only - no full name)
+    public void invalidInputDataRequiredOnlyNoFullName(){
+        email = TestDataGenerator.generateRandomEmailAddress(5);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+        noFullName = "";
+
+        System.out.println("Invalid input data generated (required input only - no full name): " + "\n");
+        logger.info("Email address (required input only - no full name): " + email);
+        logger.info("Password (required input only - no full name): " + password);
+        logger.info("Confirm password (required input only - no full name): " + confirmPassword);
+        logger.info("No full Name (required input only - no full name): " + noFullName);
+        System.out.println("\n");
+    }
 
     //valid address input method(this input field has no restrictions)
     public void inputValidAddress(){
@@ -332,6 +347,12 @@ public class SignUpPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
         wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
         confirmPasswordInputField.sendKeys(noConfirmPassword);
+    }
+    //invalid data input method - no full name
+    public void inputNoFullName(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(fullNameInputField));
+        fullNameInputField.sendKeys(noFullName);
     }
 
     //'Premium membership' click method
