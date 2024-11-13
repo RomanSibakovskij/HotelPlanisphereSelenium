@@ -319,6 +319,8 @@ public class TestMethods extends BaseTest{
         assertEquals("Please fill out this field.", signUpPage.getMissingSingularInputMessage(), "The expected error message doesn't match expectations");
     }
 
+    //valid user logout test
+
     //logout test method
     protected void userLogOutTest(MyAccountPage myAccountPage){
         HomePage homePage = new HomePage(driver);
@@ -330,6 +332,35 @@ public class TestMethods extends BaseTest{
         myAccountPage.clickLogOutButton();
         //assert the user has returned to homepage
         assertEquals("This site is a sandbox to practice test automation.", homePage.getHomePageDescriptorTitle(), "The homepage descriptor title doesn't match expectations or the user hasn't returned to homepage");
+    }
+
+    //valid login tests
+
+    //valid user login test method(required input only)
+    protected void validUserLoginWithRequiredInputOnlyTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //click 'Login' link
+        homePage.clickNavbarLoginLink();
+        //assert the user gets onto login page
+        assertEquals("Login", loginPage.getLoginPageTitle(), "The login page title doesn't match expectations or the user isn't on the login page");
+        //login page web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //valid login input data getter
+        loginPage.validLoginInputDataWithRequiredOnlyGetter(signUpPage);
+        //input valid email
+        loginPage.inputValidEmailAddress();
+        //input valid password
+        loginPage.inputValidPassword();
+        //click 'Login' button
+        loginPage.clickLoginButton();
+        //assert the user gets on 'My account' page
+        assertEquals("MyPage", myAccountPage.getMyAccountPageTitle(), "The 'My account' page title doesn't match expectations or the user is on the wrong page");
     }
 
     //homepage web element assert test method
@@ -441,6 +472,18 @@ public class TestMethods extends BaseTest{
         System.out.println("My account displayed data: " + "\n");
         logger.info(String.valueOf(myAccountPage.getMyAccountTableData()));
         System.out.println("\n");
+    }
+
+    //login page web element assert test method
+    protected void isLoginPageWebElementDisplayed(LoginPage loginPage) {
+        //assert login page title is displayed
+        assertTrue(loginPage.isLoginPageTitleDisplayed(), "The 'Login' page title isn't displayed");
+        //assert email input field is displayed
+        assertTrue(loginPage.isEmailInputDisplayed(), "The email input field isn't displayed");
+        //assert password input field is displayed
+        assertTrue(loginPage.isPasswordInputDisplayed(), "The password input field isn't displayed");
+        //assert login button is displayed
+        assertTrue(loginPage.isLoginButtonDisplayed(), "The login button isn't displayed");
     }
 
     //general page web element assert test method

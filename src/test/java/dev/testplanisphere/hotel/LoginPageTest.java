@@ -11,13 +11,32 @@ public class LoginPageTest extends TestMethods{
     @Tag("Required_Input_Only")
     void validUserLogOutRequiredInputOnlyTest(){
         HomePage homePage = new HomePage(driver);
+        SignUpPage signUpPage = new SignUpPage(driver);
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
         //navigate to sign-up page test
         navigateToSignUpPageTest(homePage);
-        SignUpPage signUpPage = new SignUpPage(driver);
         //valid user account creation test (required only)
         createValidUserAccountRequiredOnlyInputTest(signUpPage);
-        MyAccountPage myAccountPage = new MyAccountPage(driver);
         //user logout test
         userLogOutTest(myAccountPage);
+    }
+
+    //Test 004 -> valid user account login test (the required input only)
+    @Test
+    @DisplayName("Valid User Account Login Test (required input only)")
+    @Tag("Valid_User_Login")
+    @Tag("Required_Input_Only")
+    void validUserLoginRequiredInputOnlyTest(){
+        HomePage homePage = new HomePage(driver);
+        SignUpPage signUpPage = new SignUpPage(driver);
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        //navigate to sign-up page test
+        navigateToSignUpPageTest(homePage);
+        //valid user account creation test (required only)
+        createValidUserAccountRequiredOnlyInputTest(signUpPage);
+        //user logout test
+        userLogOutTest(myAccountPage);
+        //valid user login test
+        validUserLoginWithRequiredInputOnlyTest(signUpPage);
     }
 }

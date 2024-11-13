@@ -395,6 +395,10 @@ public class SignUpPage extends BasePage{
     //phone input hint
     public String getPhoneInputHint(){return phoneInputHint.getText();}
 
+    //valid sign-up data getters(for login)
+    public String getValidUserEmail(){return email;}
+    public String getValidUserPassword(){return password;}
+
     //sign-up page web element assert methods
     public boolean isSignUpPageTitleDisplayed() {return signUpPageTitle.isDisplayed();}
     public boolean isRequiredBadgeDisplayed() {return requiredBadge.isDisplayed();}

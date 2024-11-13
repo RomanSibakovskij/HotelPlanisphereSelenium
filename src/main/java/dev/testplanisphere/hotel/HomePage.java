@@ -73,6 +73,8 @@ public class HomePage extends BasePage{
     }
     //click navbar 'sign-up' link method
     public void clickNavbarSignUpLink(){clickNavbarLink(2);}
+    //click navbar 'Login' link method
+    public void clickNavbarLoginLink(){clickNavbarLink(4);}
 
     //homepage descriptor title getter
     public String getHomePageDescriptorTitle(){return homePageDescriptorTitle.getText();}
