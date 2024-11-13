@@ -438,6 +438,31 @@ public class TestMethods extends BaseTest{
         //assert the user gets the expected error message
         assertEquals("Please fill out this field.", loginPage.getMissingSingularInputMessage(), "The invalid login input error message doesn't match expectations");
     }
+    //invalid user login test method(the required input only - no password)
+    protected void invalidUserLoginWithRequiredInputOnlyNoPasswordTest(SignUpPage signUpPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //click 'Login' link
+        homePage.clickNavbarLoginLink();
+        //assert the user gets onto login page
+        assertEquals("Login", loginPage.getLoginPageTitle(), "The login page title doesn't match expectations or the user isn't on the login page");
+        //login page web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //invalid login input data getter (no password)
+        loginPage.invalidLoginInputDataWithRequiredOnlyNoPasswordGetter(signUpPage);
+        //input valid email
+        loginPage.inputValidEmailAddress();
+        //don't input password
+        loginPage.inputNoPassword();
+        //click 'Login' button
+        loginPage.clickLoginButton();
+        //assert the user gets the expected error message
+        assertEquals("Please fill out this field.", loginPage.getMissingSingularInputMessage(), "The invalid login input error message doesn't match expectations");
+    }
 
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage) {
