@@ -32,6 +32,8 @@ public class SignUpPageTest extends TestMethods{
         createValidUserAccountAllInputTest(signUpPage);
     }
 
+    //negative user account creation tests
+
     //Test 002b -> invalid user account creation test (all input - too short phone number)
     @Test
     @DisplayName("Invalid User Account Creation Test (all input - too short phone number)")

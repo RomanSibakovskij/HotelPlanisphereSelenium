@@ -13,6 +13,8 @@ public class LoginPage extends BasePage{
     private WebElement loginPageTitle;
     @FindBy(xpath = "//input[@id='email']")
     private WebElement emailInputField;
+    @FindBy(xpath = "//div[.='Email or password is invalid.']")
+    private WebElement invalidLoginInputMessage;
     @FindBy(xpath = "//input[@id='password']")
     private WebElement passwordInputField;
     @FindBy(xpath = "//button[@id='login-button']")
@@ -21,6 +23,9 @@ public class LoginPage extends BasePage{
     //valid login data
     private String validLoginEmail;
     private String validLoginPassword;
+
+    //invalid singular input data
+    private String invalidLoginEmail;
 
     public LoginPage(WebDriver driver) {super(driver);}
 
@@ -47,11 +52,31 @@ public class LoginPage extends BasePage{
         passwordInputField.sendKeys(validLoginPassword);
     }
 
+    //invalid login input data
+    public void invalidLoginInputDataWithRequiredOnlyInvalidEmailGetter(SignUpPage signUpPage) {
+        invalidLoginEmail = "vb@example.com";
+        validLoginPassword = signUpPage.getValidUserPassword();
+
+        System.out.println("Valid user login data (required only inputs - invalid login email): " + "\n");
+        logger.info("Invalid user login email (required only inputs - invalid login email): " + invalidLoginEmail);
+        logger.info("Valid user login password (required only inputs - invalid login email): " + validLoginPassword);
+        System.out.println("\n");
+    }
+    //invalid user login email input method
+    public void inputInvalidEmailAddress(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(invalidLoginEmail);
+    }
+
     //click 'Login' button method
     public void clickLoginButton(){loginButton.click();}
 
     //login page title getter
     public String getLoginPageTitle() {return loginPageTitle.getText();}
+
+    //invalid singular input message getter
+    public String getInvalidLoginInputMessage(){return invalidLoginInputMessage.getText();}
 
     //login web element assert methods
     public boolean isLoginPageTitleDisplayed() {return loginPageTitle.isDisplayed();}

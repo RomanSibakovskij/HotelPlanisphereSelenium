@@ -39,4 +39,25 @@ public class LoginPageTest extends TestMethods{
         //valid user login test
         validUserLoginWithRequiredInputOnlyTest(signUpPage);
     }
+
+    //negative user login tests
+
+    //Test 004a -> invalid user account login test (the required input only - invalid email address)
+    @Test
+    @DisplayName("Invalid User Account Login Test (required input only - invalid email address)")
+    @Tag("Invalid_User_Login")
+    @Tag("Required_Input_Only")
+    void invalidUserLoginRequiredInputOnlyTest(){
+        HomePage homePage = new HomePage(driver);
+        SignUpPage signUpPage = new SignUpPage(driver);
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        //navigate to sign-up page test
+        navigateToSignUpPageTest(homePage);
+        //valid user account creation test (required only)
+        createValidUserAccountRequiredOnlyInputTest(signUpPage);
+        //user logout test
+        userLogOutTest(myAccountPage);
+        //invalid user login test - invalid email address
+        invalidUserLoginWithRequiredInputOnlyInvalidEmailTest(signUpPage);
+    }
 }
