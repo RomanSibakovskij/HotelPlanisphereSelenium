@@ -14,6 +14,8 @@ public class SignUpPage extends BasePage{
     //form elements (required)
     @FindBy(xpath = "//span[@class='badge badge-primary']")
     private WebElement requiredBadge;
+    @FindBy(xpath = "//div[.='Please fill out this field.']")
+    private WebElement missingSingularInput;
     @FindBy(xpath = "//input[@id='email']")
     private WebElement emailInputField;
     @FindBy(xpath = "//div[.='Please enter a non-empty email address.']")
@@ -75,12 +77,12 @@ public class SignUpPage extends BasePage{
     private String tooShortPassword;
     //invalid singular input data (too long)
     private String tooLongPhone;
-
     //invalid singular input data (invalid email format)
     private String invalidEmailFormat;
-
     //invalid singular input data (mismatching confirm password)
     private String mismatchingConfirmPassword;
+    //missing singular input data
+    private String noEmail;
 
     public SignUpPage(WebDriver driver) {super(driver);}
 
@@ -224,6 +226,23 @@ public class SignUpPage extends BasePage{
         System.out.println("\n");
     }
 
+    //no singular input data getters
+
+    //invalid input data getter (required input data only - no email address)
+    public void invalidInputDataRequiredOnlyNoEmail(){
+        noEmail = " ";
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+        fullName = TestDataGenerator.getRandomFirstName() + " " + TestDataGenerator.getRandomLastName();
+
+        System.out.println("Valid input data generated (required input only - no email address): " + "\n");
+        logger.info("Used email address (required input only - no email address): " + noEmail);
+        logger.info("Password (required input only - no email address): " + password);
+        logger.info("Confirm password (required input only - no email address): " + confirmPassword);
+        logger.info("Full Name (required input only - no email address): " + fullName);
+        System.out.println("\n");
+    }
+
     //valid address input method(this input field has no restrictions)
     public void inputValidAddress(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
@@ -279,6 +298,13 @@ public class SignUpPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
         confirmPasswordInputField.sendKeys(mismatchingConfirmPassword);
     }
+    //no singular input
+    //invalid data input method - no email address
+    public void inputNoEmailAddress(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(noEmail);
+    }
 
     //'Premium membership' click method
     public void selectPremiumMembership(){premiumMembershipDotCircle.click();}
@@ -303,6 +329,8 @@ public class SignUpPage extends BasePage{
     public String getInvalidPasswordInputMessage(){return invalidPasswordInput.getText();}
     //mismatching confirm password input message getter
     public String getMismatchingConfirmPasswordMessage(){return mismatchingConfirmPasswordInput.getText();}
+    //already used email input message getter
+    public String getMissingSingularInputMessage(){return missingSingularInput.getText();}
 
     //sign-up button click method
     public void clickSignUpButton(){signUpButton.click();}
