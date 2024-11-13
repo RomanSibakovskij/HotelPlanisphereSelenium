@@ -319,8 +319,23 @@ public class TestMethods extends BaseTest{
         assertEquals("Please fill out this field.", signUpPage.getMissingSingularInputMessage(), "The expected error message doesn't match expectations");
     }
 
+    //logout test method
+    protected void userLogOutTest(MyAccountPage myAccountPage){
+        HomePage homePage = new HomePage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //my account web element assert
+        isMyAccountPageWebElementDisplayed(myAccountPage);
+        //click 'Logout' navbar button
+        myAccountPage.clickLogOutButton();
+        //assert the user has returned to homepage
+        assertEquals("This site is a sandbox to practice test automation.", homePage.getHomePageDescriptorTitle(), "The homepage descriptor title doesn't match expectations or the user hasn't returned to homepage");
+    }
+
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage) {
+        //assert homepage descriptor title is displayed
+        assertTrue(homePage.isHomePageDescriptorTitleDisplayed(), "The homepage descriptor title isn't displayed");
         //assert example codes section title is displayed
         assertTrue(homePage.isExampleCodesSectionTitleDisplayed(), "The example codes section title isn't displayed");
         //assert example codes section description is displayed
@@ -340,15 +355,15 @@ public class TestMethods extends BaseTest{
         //assert WebDriver.IO box Mocha link is displayed
         assertTrue(homePage.isMochaLinkDisplayed(), "The WebDriver.IO box Mocha link isn't displayed");
         //assert WebDriver.IO box view codes link is displayed
-        assertTrue(homePage.isSelenideBoxViewCodesLinkDisplayed(), "The WebDriver.IO box 'View Codes' link isn't displayed");
+        assertTrue(homePage.isWebdriverIoBoxViewCodesLinkDisplayed(), "The WebDriver.IO box 'View Codes' link isn't displayed");
         //assert Capybara box title is displayed
         assertTrue(homePage.isCapybaraBoxTitleDisplayed(), "The Capybara box title isn't displayed");
         //assert Capybara link is displayed
-        assertTrue(homePage.isSelenideFrameworkLinkDisplayed(), "The Capybara link isn't displayed");
+        assertTrue(homePage.isCapybaraLinkDisplayed(), "The Capybara link isn't displayed");
         //assert Capybara RSpec link is displayed
         assertTrue(homePage.isRSpecLinkDisplayed(), "The Capybara RSpec link isn't displayed");
         //assert Capybara box view codes link is displayed
-        assertTrue(homePage.isSelenideBoxViewCodesLinkDisplayed(), "The Capybara box 'View Codes' link isn't displayed");
+        assertTrue(homePage.isCapybaraBoxViewCodesLinkDisplayed(), "The Capybara box 'View Codes' link isn't displayed");
         //assert Selenium 4 Java box title is displayed
         assertTrue(homePage.isSelenium4JavaBoxTitleDisplayed(), "The Selenium 4 Java box title isn't displayed");
         //assert Selenium 4 Java WebDriver framework link is displayed
@@ -412,6 +427,8 @@ public class TestMethods extends BaseTest{
     protected void isMyAccountPageWebElementDisplayed(MyAccountPage myAccountPage) {
         //assert 'My account' page title displayed
         assertTrue(myAccountPage.isMyAccountPageTitleDisplayed(), "The 'My Account' page title isn't displayed");
+        //assert 'Logout' button is displayed
+        assertTrue(myAccountPage.isLogOutButtonDisplayed(), "The 'Logout' button isn't displayed");
         //assert 'Icon setting' button is displayed
         assertTrue(myAccountPage.isIconSettingButtonDisplayed(), "The 'Icon setting' button isn't displayed");
         //assert 'Delete account' button is displayed

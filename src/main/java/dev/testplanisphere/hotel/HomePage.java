@@ -12,6 +12,8 @@ public class HomePage extends BasePage{
     //homepage web elements
     @FindBy(xpath = "//h1")
     private WebElement homePageTitle;
+    @FindBy(xpath = "//h2")
+    private WebElement homePageDescriptorTitle;
     //navbar elements
     private List<WebElement> homePageNavLinkElements = driver.findElements(By.xpath("//div[@id='navbarNav']/ul/li/a"));
     //example codes section elements
@@ -71,12 +73,13 @@ public class HomePage extends BasePage{
     }
     //click navbar 'sign-up' link method
     public void clickNavbarSignUpLink(){clickNavbarLink(2);}
-    //click 'Logout' button method
-    public void clickNavbarLogoutLink(){clickNavbarLink(3);}
 
+    //homepage descriptor title getter
+    public String getHomePageDescriptorTitle(){return homePageDescriptorTitle.getText();}
 
     //homepage web element assert methods
     public boolean isHomePageTitleDisplayed(){return homePageTitle.isDisplayed();}
+    public boolean isHomePageDescriptorTitleDisplayed(){return homePageDescriptorTitle.isDisplayed();}
     public boolean isExampleCodesSectionTitleDisplayed(){return exampleCodesSectionTitle.isDisplayed();}
     public boolean isExampleCodesSectionDescriptionDisplayed(){return exampleCodesSectionDescription.isDisplayed();}
     public boolean isSelenideBoxTitleDisplayed(){return selenideBoxTitle.isDisplayed();}

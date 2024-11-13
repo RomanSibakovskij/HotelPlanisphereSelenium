@@ -12,6 +12,9 @@ public class MyAccountPage extends BasePage{
     //my account page web elements
     @FindBy(xpath = "//div[@class='row'][1]//h2")
     private WebElement myAccountPageTitle;
+    //logout button element
+    @FindBy(xpath = "//div[@id='navbarNav']/ul/li//button")
+    private WebElement logOutButton;
     //my account page data table elements
     @FindBy(xpath = "//ul[@class='list-group']/li")
     private List<WebElement> myAccountDataTableElements;
@@ -34,8 +37,12 @@ public class MyAccountPage extends BasePage{
         return myAccountTableData;
     }
 
+    //logout button click method
+    public void clickLogOutButton() {logOutButton.click();}
+
     //my account page web element assert method
     public boolean isMyAccountPageTitleDisplayed(){return myAccountPageTitle.isDisplayed();}
+    public boolean isLogOutButtonDisplayed(){return logOutButton.isDisplayed();}
     public boolean isIconSettingButtonDisplayed(){return iconSettingButton.isDisplayed();}
     public boolean isDeleteAccountButtonDisplayed(){return deleteAccountButton.isDisplayed();}
     public boolean isMyAccountDataTableElementDisplayed() {
