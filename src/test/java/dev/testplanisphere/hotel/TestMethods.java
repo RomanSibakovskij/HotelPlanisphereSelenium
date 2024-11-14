@@ -544,6 +544,22 @@ public class TestMethods extends BaseTest{
         assertEquals("Email or password is invalid.", loginPage.getInvalidLoginInputMessage(), "The invalid login input error message doesn't match expectations");
     }
 
+    // reserve dashboard page tests
+
+    //navigate to reserve dashboard page test method
+    protected void navigateToReserveDashboardPageTest(MyAccountPage myAccountPage){
+        HomePage homePage = new HomePage(driver);
+        ReserveDashboardPage reserveDashboardPage = new ReserveDashboardPage(driver);
+        //click 'reserve' navbar link
+        homePage.clickNavbarReserveLink();
+        //assert the user gets onto reserve dashboard page
+        assertEquals("Plans", reserveDashboardPage.getReserveDashboardPageTitle(), "The reserve dashboard page title doesn't match expectations or the user is on the wrong page");
+        //reserve dashboard page web element assert
+        isReserveDashboardPageWebElementDisplayed(reserveDashboardPage);
+        //log reserve dashboard page data
+        logReserveDashboardData(reserveDashboardPage);
+    }
+
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage) {
         //assert homepage descriptor title is displayed
@@ -665,6 +681,28 @@ public class TestMethods extends BaseTest{
         assertTrue(loginPage.isPasswordInputDisplayed(), "The password input field isn't displayed");
         //assert login button is displayed
         assertTrue(loginPage.isLoginButtonDisplayed(), "The login button isn't displayed");
+    }
+
+    //reserve dashboard page web element assert test method
+    protected void isReserveDashboardPageWebElementDisplayed(ReserveDashboardPage reserveDashboardPage){
+        //assert reserve dashboard page title is displayed
+        assertTrue(reserveDashboardPage.isReserveDashboardPageTitleDisplayed(), "The 'Reserve Dashboard' page title isn't displayed");
+        //assert card header is displayed
+        assertTrue(reserveDashboardPage.isCardHeaderDisplayed(), "The card header isn't displayed");
+        //assert card title is displayed
+        assertTrue(reserveDashboardPage.isCardTitleDisplayed(), "The card title isn't displayed");
+        //assert card description is displayed
+        assertTrue(reserveDashboardPage.isCardDescriptionDisplayed(), "The card description isn't displayed");
+        //assert card reserve button is displayed
+        assertTrue(reserveDashboardPage.isCardReserveButtonDisplayed(), "The card reserve button isn't displayed");
+    }
+    //reserve dashboard page logger method
+    protected void logReserveDashboardData(ReserveDashboardPage reserveDashboardPage) {
+        System.out.println("Reserve dashboard page data: " + "\n");
+        logger.info("Reserve dashboard page card headers: " + reserveDashboardPage.getCardHeader());
+        logger.info("Reserve dashboard page card titles: " + reserveDashboardPage.getCardTitle());
+        logger.info("Reserve dashboard page card descriptions: " + reserveDashboardPage.getCardDescription());
+        System.out.println("\n");
     }
 
     //general page web element assert test method

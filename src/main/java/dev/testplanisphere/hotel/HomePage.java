@@ -74,6 +74,8 @@ public class HomePage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(homePageNavLinkElements.get(navbarLinkIndex)));
         homePageNavLinkElements.get(navbarLinkIndex).click();
     }
+    //click navbar 'reserve' link method
+    public void clickNavbarReserveLink(){clickNavbarLink(1);}
     //click navbar 'sign-up' link method
     public void clickNavbarSignUpLink(){clickNavbarLink(2);}
     //click navbar 'Login' link method
