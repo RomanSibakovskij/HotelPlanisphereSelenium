@@ -19,18 +19,14 @@ public class ReserveDashboardPage extends BasePage{
     private List<WebElement> cardTitleElements;
     @FindBy(xpath = "//ul[@class='list-unstyled']")
     private List<WebElement> cardDescriptionElements;
-    private List<WebElement> cardReserveRoomButtonElements = driver.findElements(By.xpath("//a[@class='btn btn-primary']"));
+    //reserve room button elements
+    @FindBy(xpath = "//a[@href='./reserve.html?plan-id=0']")
+    private WebElement reserveRoomOneButton;
 
     public ReserveDashboardPage(WebDriver driver) {super(driver);}
 
-    //homepage navbar link click method
-    public void clickReserveButtonElement(int reserveButtonIndex) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(700));
-        wait.until(ExpectedConditions.elementToBeClickable(cardReserveRoomButtonElements.get(reserveButtonIndex)));
-        cardReserveRoomButtonElements.get(reserveButtonIndex).click();
-    }
     //click 'reserve' button one method
-    public void clickReserveButton1(){clickReserveButtonElement(1);}
+    public void clickReserveButtonRoomOne(){reserveRoomOneButton.click();}
 
     //reserve dashboard page title getter
     public String getReserveDashboardPageTitle() {return reserveDashboardPageTitle.getText();}
@@ -88,13 +84,7 @@ public class ReserveDashboardPage extends BasePage{
         }
         return true;
     }
-    public boolean isCardReserveButtonDisplayed() {
-        for (WebElement element : cardReserveRoomButtonElements) {
-            if (!element.isDisplayed()) {
-                return false;
-            }
-        }
-        return true;
-    }
+
+    public boolean isReserveRoomOneButtonDisplayed() {return reserveRoomOneButton.isDisplayed();}
 
 }

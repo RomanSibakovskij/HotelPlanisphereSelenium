@@ -560,6 +560,12 @@ public class TestMethods extends BaseTest{
         logReserveDashboardData(reserveDashboardPage);
     }
 
+    //reserve the room 'Plan with special offers' test method
+    protected void reservePlanWithSpecialOffersTest(ReserveDashboardPage reserveDashboardPage){
+        //click 'Reserve' button one
+        reserveDashboardPage.clickReserveButtonRoomOne();
+    }
+
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage) {
         //assert homepage descriptor title is displayed
@@ -693,8 +699,8 @@ public class TestMethods extends BaseTest{
         assertTrue(reserveDashboardPage.isCardTitleDisplayed(), "The card title isn't displayed");
         //assert card description is displayed
         assertTrue(reserveDashboardPage.isCardDescriptionDisplayed(), "The card description isn't displayed");
-        //assert card reserve button is displayed
-        assertTrue(reserveDashboardPage.isCardReserveButtonDisplayed(), "The card reserve button isn't displayed");
+        //assert card reserve room one button is displayed
+        assertTrue(reserveDashboardPage.isReserveRoomOneButtonDisplayed(), "The card reserve room one button isn't displayed");
     }
     //reserve dashboard page logger method
     protected void logReserveDashboardData(ReserveDashboardPage reserveDashboardPage) {
