@@ -23,6 +23,15 @@ public class ReserveDashboardPage extends BasePage{
 
     public ReserveDashboardPage(WebDriver driver) {super(driver);}
 
+    //homepage navbar link click method
+    public void clickReserveButtonElement(int reserveButtonIndex) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(700));
+        wait.until(ExpectedConditions.elementToBeClickable(cardReserveRoomButtonElements.get(reserveButtonIndex)));
+        cardReserveRoomButtonElements.get(reserveButtonIndex).click();
+    }
+    //click 'reserve' button one method
+    public void clickReserveButton1(){clickReserveButtonElement(1);}
+
     //reserve dashboard page title getter
     public String getReserveDashboardPageTitle() {return reserveDashboardPageTitle.getText();}
 
