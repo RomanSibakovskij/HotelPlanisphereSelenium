@@ -564,6 +564,15 @@ public class TestMethods extends BaseTest{
     protected void reservePlanWithSpecialOffersTest(ReserveDashboardPage reserveDashboardPage){
         //click 'Reserve' button one
         reserveDashboardPage.clickReserveButtonRoomOne();
+        ReserveRoomPage reserveRoomPage = new ReserveRoomPage(driver);
+        //reserve room web element assert
+        //isReserveRoomPageWebElementDisplayed(reserveRoomPage);
+//        //assert the user gets on the reserve room page
+//        assertEquals("Reservation", reserveRoomPage.getReserveRoomPageHeaderTitle(), "The reserve room page header title doesn't match expectations or the user is on the wrong page");
+//        //assert the user got on the correct reserve room page
+//        assertEquals("Plan with special offers", reserveRoomPage.getReserveRoomPageTitle(), "The reserve room page title doesn't match expectations or the user is on the wrong reserve room page");
+//        //log the reserve room data
+        logReserveRoomData(reserveRoomPage);
     }
 
     //homepage web element assert test method
@@ -708,6 +717,53 @@ public class TestMethods extends BaseTest{
         logger.info("Reserve dashboard page card headers: " + reserveDashboardPage.getCardHeader());
         logger.info("Reserve dashboard page card titles: " + reserveDashboardPage.getCardTitle());
         logger.info("Reserve dashboard page card descriptions: " + reserveDashboardPage.getCardDescription());
+        System.out.println("\n");
+    }
+
+    //reserve room page web element assert test method
+    protected void isReserveRoomPageWebElementDisplayed(ReserveRoomPage reserveRoomPage){
+        //assert reserve room page header title is displayed
+        assertTrue(reserveRoomPage.isPageHeaderTitleDisplayed(), "The reserve room page header title isn't displayed");
+        //assert reserve room page title is displayed
+        assertTrue(reserveRoomPage.isPageTitleDisplayed(), "The reserve room page title isn't displayed");
+        //assert reserve room page descriptor title is displayed
+        assertTrue(reserveRoomPage.isDescriptorTitleDisplayed(), "The reserve room page descriptor title isn't displayed");
+        //assert reserve room page required badge is displayed
+        assertTrue(reserveRoomPage.isRequiredBadgeDisplayed(), "The reserve room page required badge isn't displayed");
+        //assert check-in input field is displayed
+        assertTrue(reserveRoomPage.isCheckInInputFieldDisplayed(), "The check-in input field isn't displayed");
+        //assert stay input field is displayed
+        assertTrue(reserveRoomPage.isStayInputFieldDisplayed(), "The stay input field isn't displayed");
+        //assert guests input field is displayed
+        assertTrue(reserveRoomPage.isGuestsInputFieldDisplayed(), "The guests input field isn't displayed");
+        //assert additional plans description text is displayed
+        assertTrue(reserveRoomPage.isAdditionalPlansTextDisplayed(), "The additional plans description text isn't displayed");
+        //assert breakfast checkbox is displayed
+        assertTrue(reserveRoomPage.isBreakfastCheckboxDisplayed(), "The breakfast checkbox isn't displayed");
+        //assert early check-in checkbox is displayed
+        assertTrue(reserveRoomPage.isEarlyCheckInCheckboxDisplayed(), "The early check-in checkbox isn't displayed");
+        //assert sightseeing checkbox is displayed
+        assertTrue(reserveRoomPage.isSightseeingCheckboxDisplayed(), "The sightseeing checkbox isn't displayed");
+        //assert name input field is displayed
+        assertTrue(reserveRoomPage.isNameInputFieldDisplayed(), "The reserve room page name input field isn't displayed");
+        //assert confirmation dropdown menu is displayed
+        assertTrue(reserveRoomPage.isConfirmationDropdownMenuDisplayed(), "The confirmation dropdown menu isn't displayed");
+        //assert total price title is displayed
+        assertTrue(reserveRoomPage.isTotalTitleDisplayed(), "The total price title isn't displayed");
+        //assert total price is displayed
+        assertTrue(reserveRoomPage.isTotalPriceDisplayed(), "The total price isn't displayed");
+        //assert confirmation button is displayed
+        assertTrue(reserveRoomPage.isConfirmationButtonDisplayed(), "The confirmation button isn't displayed");
+        //assert reserve room description text is displayed
+        assertTrue(reserveRoomPage.isReserveRoomDescriptionDisplayed(), "The reserve room description text isn't displayed");
+    }
+    //log reserve room data
+    protected void logReserveRoomData(ReserveRoomPage reserveRoomPage){
+        System.out.println("Reserve room displayed data: " + "\n");
+        //logger.info("Reserve room page title: " + reserveRoomPage.getReserveRoomPageTitle());
+        //logger.info("Reserve room descriptor: " + reserveRoomPage.getReserveRoomDescriptorTitle());
+        logger.info("Reserve room total price section title: " + reserveRoomPage.getTotalPriceTitle());
+        logger.info("Reserve room total reservation price: " + reserveRoomPage.getTotalRoomReservationPrice());
         System.out.println("\n");
     }
 
